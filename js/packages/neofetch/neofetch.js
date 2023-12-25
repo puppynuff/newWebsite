@@ -1,3 +1,5 @@
+//* Shiro - 12/22/23
+
 applications.neofetch = (_command, args, TERMINAL) => {
     let date = new Date();
 

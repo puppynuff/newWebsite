@@ -136,35 +136,11 @@ class Line {
  */
 function handleInput(CURSOR, TERMINAL) {
     let typing_line = new Line(CURSOR, "white", TERMINAL);
-    let current_text = "";
+    typing_line.current_text = "";
 
     typing_line.build();
 
-    document.addEventListener("keydown",  (key)=> {
-        switch(key.key) {
-            case "Backspace": {
-                if(key.ctrlKey) current_text = "";
-
-                current_text = current_text.slice(0, -1);
-                typing_line.modifyText(current_text + CURSOR);
-                return;
-            }
-
-            case "Enter" : {
-                if(typing_line.editable == false) return;
-                typing_line.finished();
-                return runCommand(current_text, CURSOR, TERMINAL);
-            }
-
-            default: {
-                if(key.key.length > 1) return;
-
-                current_text += key.key;
-                typing_line.modifyText(current_text + CURSOR);
-                return;
-            }
-        }
-    });
+    document.addEventListener("keydown",  (key) => inputEvent(key, typing_line, CURSOR, TERMINAL));
 }
 
 function setup() {
@@ -212,4 +188,34 @@ function setStyles(element, styles) {
     }
 
     return element;
+}
+
+function inputEvent(key, typing_line, CURSOR, TERMINAL) {
+    switch(key.key) {
+        case "Backspace": return backspaceEvent(key, typing_line, CURSOR);
+        case "Enter" : return enterEvent(key, typing_line, CURSOR, TERMINAL);
+        default: return defaultEvent(key, typing_line, CURSOR);
+    }
+}
+
+function backspaceEvent(key, typing_line, CURSOR) {
+    if(key.ctrlKey) typing_line.current_text = "";
+
+    typing_line.current_text = typing_line.current_text.slice(0, -1);
+    typing_line.modifyText(typing_line.current_text + CURSOR);
+    return typing_line.current_text;
+}
+
+function enterEvent(_key, typing_line, CURSOR, TERMINAL) {
+    if(typing_line.editable == false) return;
+    typing_line.finished();
+    return runCommand(typing_line.current_text, CURSOR, TERMINAL);
+}
+
+function defaultEvent(key, typing_line, CURSOR) {
+    if(key.key.length > 1) return;
+
+    typing_line.current_text += key.key;
+    typing_line.modifyText(typing_line.current_text + CURSOR);
+    return typing_line.current_text;
 }
