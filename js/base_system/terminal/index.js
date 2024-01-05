@@ -148,7 +148,7 @@ function setup() {
 
     const TERMINAL = new Terminal(document.body);
 
-    (applications.header)("","",TERMINAL);
+    (applications.header)("",["", "white"],TERMINAL);
 
     new Line("Terminal doesn't autoscroll. Sorry!", "yellow", TERMINAL).build();
     new Line("Hello, welcome to RubyOS!", "white", TERMINAL).build();

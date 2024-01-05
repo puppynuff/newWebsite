@@ -9,6 +9,10 @@ html, body {
     scrollbar-width: none;
 }
 
+svg {
+    fill: #D7289D
+}
+
 body::-webkit-scrollbar {
     display: none;
 }

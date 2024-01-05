@@ -11,6 +11,7 @@ applications.rwm = (_command, args, TERMINAL) => {
     background_div.style.margin = "0";
 
     background_div.style.backgroundColor = "black";
+    background_div.id = "background-div";
 
     document.body.innerHTML = "";
     document.body.appendChild(background_div);
@@ -29,5 +30,8 @@ applications.rwm = (_command, args, TERMINAL) => {
 
     // Work on windows next.
 
-    const testing_window = new RWM_Window("Testing~");
+    const testing_window = new RWM_Window("Testing~", {
+        width: 800,
+        height: 800
+    });
 }
