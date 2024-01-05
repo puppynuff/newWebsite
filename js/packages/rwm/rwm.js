@@ -1,4 +1,6 @@
 //* Shiro - 12/22/23
+let openWindows = [];
+
 
 // At some point I need to make a desktop environment file thing.
 // But for now this will work.
@@ -29,6 +31,12 @@ applications.rwm = (_command, args, TERMINAL) => {
     background_div.appendChild(task_bar_div);
 
     // Work on windows next.
+
+    document.addEventListener("mousemove", (ev) => {
+        for(let i = 0; i < openWindows.length; i++) {
+            openWindows[i].handleMovement(ev);
+        }
+    })
 
     const testing_window = new RWM_Window("Testing~", {
         width: 800,
