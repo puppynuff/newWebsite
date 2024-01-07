@@ -18,7 +18,6 @@ applications.rwm = (_command, args, TERMINAL) => {
     document.body.innerHTML = "";
     document.body.appendChild(background_div);
 
-
     const task_bar_div = document.createElement("div");
     task_bar_div.style.backgroundColor = "rgba(100, 100, 100, 0.2)";
     task_bar_div.style.height = "50px";
