@@ -1,22 +1,27 @@
 //* Shiro - 12/22/23
-let openWindows = [];
+let open_windows = [];
 
 
 // At some point I need to make a desktop environment file thing.
 // But for now this will work.
 applications.rwm = (_command, args, TERMINAL) => {
-    const background_div = document.createElement("div");
+    TERMINAL.stop();
+    const BACKGROUND_DIV = document.createElement("div");
 
-    background_div.style.width = "100%";
-    background_div.style.height = "100%";
-    background_div.style.padding = "0";
-    background_div.style.margin = "0";
+    BACKGROUND_DIV.style.width = "100%";
+    BACKGROUND_DIV.style.height = "100%";
+    BACKGROUND_DIV.style.padding = "0";
+    BACKGROUND_DIV.style.margin = "0";
+    BACKGROUND_DIV.style.backgroundImage = "url(/photos/desktop.png)";
+    BACKGROUND_DIV.style.backgroundPosition = "center";
+    BACKGROUND_DIV.style.backgroundSize = "cover";
 
-    background_div.style.backgroundColor = "black";
-    background_div.id = "background-div";
+
+    // background_div.style.backgroundColor = "black";
+    BACKGROUND_DIV.id = "background-div";
 
     document.body.innerHTML = "";
-    document.body.appendChild(background_div);
+    document.body.appendChild(BACKGROUND_DIV);
 
     const task_bar_div = document.createElement("div");
     task_bar_div.style.backgroundColor = "rgba(100, 100, 100, 0.2)";
@@ -27,18 +32,21 @@ applications.rwm = (_command, args, TERMINAL) => {
 
     window.onresize = (_ev) => {task_bar_div.style.top = `${window.innerHeight - 50}px`};
 
-    background_div.appendChild(task_bar_div);
+    BACKGROUND_DIV.appendChild(task_bar_div);
 
     // Work on windows next.
 
     document.addEventListener("mousemove", (ev) => {
-        for(let i = 0; i < openWindows.length; i++) {
-            openWindows[i].handleMovement(ev);
+        for(let i = 0; i < open_windows.length; i++) {
+            if(!open_windows[i].should_move) continue;
+            
+            open_windows[i].handleMovement(ev);
         }
     })
 
     const testing_window = new RWM_Window("Testing~", {
         width: 800,
-        height: 800
+        height: 800,
+        icon_url: "/photos/testing_icon.jpg"
     });
 }

@@ -11,16 +11,18 @@ class RWM_Window {
         width = 800,
         height = 800,
         top_color = "#181818",
+        icon_url = "/photos/no_icon.png"
     }) {
         this.name = name;
         this.width = width;
         this.height = height;
         this.maximized = false;
         this.top_color = top_color;
+        this.icon_url = icon_url;
 
-        this.array_pos = openWindows.length;
+        this.array_pos = open_windows.length;
         this.createWindow();
-        openWindows.push(this);
+        open_windows.push(this);
     }
 
 
@@ -41,7 +43,7 @@ class RWM_Window {
         HOLDER_DIV.style.height = `${this.height}px`;
         HOLDER_DIV.style.width = `${this.width}px`;
         HOLDER_DIV.style.borderRadius = `5px`;
-        HOLDER_DIV.style.backgroundColor = "white";
+        HOLDER_DIV.style.backgroundColor = "black";
         HOLDER_DIV.style.position = "relative";
         HOLDER_DIV.style.left = "2px";
         HOLDER_DIV.style.top = "2px";
@@ -76,10 +78,10 @@ class RWM_Window {
         CLOSE_BUTTON.onclick = (_ev) => {
             const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
             BORDER_DIV.remove();
-            openWindows.splice(this.array_pos, 1);
+            open_windows.splice(this.array_pos, 1);
 
-            for(let i = 0; i < openWindows.length; i++) {
-                openWindows[i].array_pos -= 1;
+            for(let i = 0; i < open_windows.length; i++) {
+                open_windows[i].array_pos -= 1;
             }
         }
 
@@ -150,9 +152,9 @@ class RWM_Window {
         WINDOW_TITLE.style.position = "absolute";
         WINDOW_TITLE.style.top = "-8px";
         WINDOW_TITLE.style.fontSize = "15px";
-        WINDOW_TITLE.style.left = "5px";
+        WINDOW_TITLE.style.left = "35px";
 
-        this.shouldMove = false;
+        this.should_move = false;
         
         TOP_DIV.onmousedown = (ev) => {
             let x_difference = 0;
@@ -167,7 +169,7 @@ class RWM_Window {
                 this.resizeWindow();
             }
 
-            this.shouldMove = true;
+            this.should_move = true;
 
             if(ev.offsetX - x_difference <= 0) x_difference = 0;
 
@@ -176,16 +178,82 @@ class RWM_Window {
         }
         
         TOP_DIV.onmouseup = (_ev) => {
-            this.shouldMove = false;
+            this.should_move = false;
         }
+
+        const WINDOW_ICON = document.createElement("img");
+        WINDOW_ICON.src = this.icon_url;
+        WINDOW_ICON.width = 30;
+        WINDOW_ICON.height = 30;
+        WINDOW_ICON.style.position = "absolute";
+        WINDOW_ICON.style.left = "0px";
+        WINDOW_ICON.style.top = "0px";
+
+
+
+        const TOP_LEFT_RESIZE = document.createElement("div");
+        TOP_LEFT_RESIZE.style.width = "10px";
+        TOP_LEFT_RESIZE.style.height = "10px";
+        TOP_LEFT_RESIZE.style.position = "absolute";
+        TOP_LEFT_RESIZE.style.left = "-5px";
+        TOP_LEFT_RESIZE.style.top = "-5px";
+        TOP_LEFT_RESIZE.style.cursor = "nw-resize";
+
+        const TOP_RIGHT_RESIZE = document.createElement("div");
+        TOP_RIGHT_RESIZE.style.width = "10px";
+        TOP_RIGHT_RESIZE.style.height = "10px";
+        TOP_RIGHT_RESIZE.style.position = "absolute";
+        TOP_RIGHT_RESIZE.style.left = `${this.width - 5}px`;
+        TOP_RIGHT_RESIZE.style.top = "-5px";
+        TOP_RIGHT_RESIZE.style.cursor = "ne-resize";
+
+        const BOTTOM_LEFT_RESIZE = document.createElement("div");
+        BOTTOM_LEFT_RESIZE.style.position = "absolute";
+        BOTTOM_LEFT_RESIZE.style.left = "-5px";
+        BOTTOM_LEFT_RESIZE.style.top = `${this.height - 5}px`;
+        BOTTOM_LEFT_RESIZE.style.cursor = "ne-resize";
+        BOTTOM_LEFT_RESIZE.style.width = "10px";
+        BOTTOM_LEFT_RESIZE.style.height = "10px";
+
+        const BOTTOM_RIGHT_RESIZE = document.createElement("div");
+        BOTTOM_RIGHT_RESIZE.style.position = "absolute";
+        BOTTOM_RIGHT_RESIZE.style.left = `${this.width - 5}px`;
+        BOTTOM_RIGHT_RESIZE.style.top = `${this.height - 5}px`;
+        BOTTOM_RIGHT_RESIZE.style.cursor = "nw-resize";
+        BOTTOM_RIGHT_RESIZE.style.width = "10px";
+        BOTTOM_RIGHT_RESIZE.style.height = "10px";
+
+        const TOP_RESIZE = document.createElement("div");
+        TOP_RESIZE.style.position = "absolute";
+        TOP_RESIZE.style.left = "5px";
+        TOP_RESIZE.style.top = "-5px";
+        TOP_RESIZE.style.width = `${this.width - 10}px`;
+        TOP_RESIZE.style.height = "10px";
+        TOP_RESIZE.style.cursor = "ns-resize"
+
+        const LEFT_RESIZE = document.createElement("div");
+        
+        const RIGHT_RESIZE = document.createElement("div");
+        
+        const BOTTOM_RESIZE = document.createElement("div");
         
         BORDER_DIV.appendChild(HOLDER_DIV);
+        BORDER_DIV.appendChild(TOP_LEFT_RESIZE);
+        BORDER_DIV.appendChild(TOP_RIGHT_RESIZE);
+        BORDER_DIV.appendChild(BOTTOM_LEFT_RESIZE);
+        BORDER_DIV.appendChild(BOTTOM_RIGHT_RESIZE);
+        BORDER_DIV.appendChild(TOP_RESIZE);
+
         HOLDER_DIV.appendChild(CLOSE_BUTTON);
         HOLDER_DIV.appendChild(MINIMIZE_BUTTON);
         HOLDER_DIV.appendChild(MAXIMIZE_BUTTON);
-        MAXIMIZE_BUTTON.appendChild(MAXIMIZE_ICON);
-        TOP_DIV.appendChild(WINDOW_TITLE);
         HOLDER_DIV.appendChild(TOP_DIV);
+        
+        MAXIMIZE_BUTTON.appendChild(MAXIMIZE_ICON);
+        
+        TOP_DIV.appendChild(WINDOW_TITLE);
+        TOP_DIV.appendChild(WINDOW_ICON);
+        
         document.getElementById("background-div").appendChild(BORDER_DIV);
     }
 
@@ -194,11 +262,9 @@ class RWM_Window {
      * @param {MouseEvent} mouse_pos 
      */
     handleMovement(mouse_pos) {
-        if(this.shouldMove) {
-            const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
-            BORDER_DIV.style.left = `${mouse_pos.x - this.offsetX}px`;
-            BORDER_DIV.style.top = `${mouse_pos.y - this.offsetY}px`;
-        }
+        const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
+        BORDER_DIV.style.left = `${mouse_pos.x - this.offsetX}px`;
+        BORDER_DIV.style.top = `${mouse_pos.y - this.offsetY}px`;
     }
 
     resizeWindow() {

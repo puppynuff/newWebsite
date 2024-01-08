@@ -79,6 +79,10 @@ class Terminal {
             this.lines[i].remove();
         }
     }
+
+    stop() {
+        this.stopped = true;
+    }
 }
 
 class Line {
@@ -135,6 +139,7 @@ class Line {
  * @param {Terminal} TERMINAL
  */
 function handleInput(CURSOR, TERMINAL) {
+    if(TERMINAL.stopped == true) return;
     let typing_line = new Line(CURSOR, "white", TERMINAL);
     typing_line.current_text = "";
 
@@ -179,6 +184,8 @@ function runCommand(command, CURSOR, TERMINAL) {
     }
 
     new Line(`Command not found, ${args[0]}`, "red", TERMINAL).build();
+
+    if(TERMINAL.stopped == true) return;
     return handleInput(CURSOR, TERMINAL);
 }
 
