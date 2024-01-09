@@ -223,6 +223,13 @@ class RWM_Window {
         BOTTOM_RIGHT_RESIZE.style.width = "10px";
         BOTTOM_RIGHT_RESIZE.style.height = "10px";
 
+        BOTTOM_RIGHT_RESIZE.onmousedown = (ev) => {
+            this.resize_part = "br"; //* Bottom Right
+            this.resizing = true;
+            this.offsetX = ev.offsetX;
+            this.offsetY = ev.offsetY;
+        }
+
         const TOP_RESIZE = document.createElement("div");
         TOP_RESIZE.style.position = "absolute";
         TOP_RESIZE.style.left = "5px";
@@ -232,10 +239,28 @@ class RWM_Window {
         TOP_RESIZE.style.cursor = "ns-resize"
 
         const LEFT_RESIZE = document.createElement("div");
-        
+        LEFT_RESIZE.style.position = "absolute";
+        LEFT_RESIZE.style.left = "-5px";
+        LEFT_RESIZE.style.top = "5px";
+        LEFT_RESIZE.style.width = "10px";
+        LEFT_RESIZE.style.height = `${this.height - 10}px`;
+        LEFT_RESIZE.style.cursor = "ew-resize";
+
         const RIGHT_RESIZE = document.createElement("div");
+        RIGHT_RESIZE.style.position = "absolute";
+        RIGHT_RESIZE.style.left = `${this.width - 5}px`;
+        RIGHT_RESIZE.style.top = "5px";
+        RIGHT_RESIZE.style.width = "10px";
+        RIGHT_RESIZE.style.height = `${this.height - 10}px`;
+        RIGHT_RESIZE.style.cursor = "ew-resize";
         
         const BOTTOM_RESIZE = document.createElement("div");
+        BOTTOM_RESIZE.style.position = "absolute";
+        BOTTOM_RESIZE.style.left = "5px";
+        BOTTOM_RESIZE.style.top = `${this.height - 5}px`;
+        BOTTOM_RESIZE.style.width = `${this.width - 10}px`;
+        BOTTOM_RESIZE.style.height = "10px";
+        BOTTOM_RESIZE.style.cursor = "ns-resize"
         
         BORDER_DIV.appendChild(HOLDER_DIV);
         BORDER_DIV.appendChild(TOP_LEFT_RESIZE);
@@ -243,6 +268,9 @@ class RWM_Window {
         BORDER_DIV.appendChild(BOTTOM_LEFT_RESIZE);
         BORDER_DIV.appendChild(BOTTOM_RIGHT_RESIZE);
         BORDER_DIV.appendChild(TOP_RESIZE);
+        BORDER_DIV.appendChild(LEFT_RESIZE);
+        BORDER_DIV.appendChild(RIGHT_RESIZE);
+        BORDER_DIV.appendChild(BOTTOM_RESIZE);
 
         HOLDER_DIV.appendChild(CLOSE_BUTTON);
         HOLDER_DIV.appendChild(MINIMIZE_BUTTON);
@@ -253,6 +281,10 @@ class RWM_Window {
         
         TOP_DIV.appendChild(WINDOW_TITLE);
         TOP_DIV.appendChild(WINDOW_ICON);
+
+        document.addEventListener("mouseup", (ev) => {
+            this.resizing = false;
+        })
         
         document.getElementById("background-div").appendChild(BORDER_DIV);
     }
@@ -265,6 +297,12 @@ class RWM_Window {
         const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
         BORDER_DIV.style.left = `${mouse_pos.x - this.offsetX}px`;
         BORDER_DIV.style.top = `${mouse_pos.y - this.offsetY}px`;
+    }
+
+    handleResize(ev) {
+        if(!this.resizing) return;
+        
+        (this[this.resize_part])(ev);
     }
 
     resizeWindow() {
@@ -286,5 +324,26 @@ class RWM_Window {
         CLOSE_BUTTON.style.left = `${this.width - 35}px`;
         MINIMIZE_BUTTON.style.left = `${this.width - 95}px`;
         MAXIMIZE_BUTTON.style.left = `${this.width - 65}px`;
+    }
+
+    //* ------- Math for resizing windows~ ------- 
+    /**
+     *  Bottom Right
+     * 
+     * @param {MouseEvent} ev
+     * 
+     * @returns {Array<Number, Number>} 
+     */
+    br(ev)  {
+        const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
+
+        console.log(this.offsetX);
+
+        this.width = Math.abs((ev.x + this.offsetX) - Number(BORDER_DIV.style.left.replace("px","")));
+        this.height = Math.abs((ev.y + this.offsetY) - Number(BORDER_DIV.style.top.replace("px", "")));
+
+        console.log(this.width);
+
+        this.resizeWindow();
     }
 }

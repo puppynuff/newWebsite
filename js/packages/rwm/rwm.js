@@ -38,8 +38,13 @@ applications.rwm = (_command, args, TERMINAL) => {
 
     document.addEventListener("mousemove", (ev) => {
         for(let i = 0; i < open_windows.length; i++) {
+            if(open_windows[i].resizing) {
+                console.log(open_windows[i].resizing);
+                open_windows[i].handleResize(ev);
+                continue;
+            }
+
             if(!open_windows[i].should_move) continue;
-            
             open_windows[i].handleMovement(ev);
         }
     })
