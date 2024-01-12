@@ -198,6 +198,7 @@ class RWM_Window {
         TOP_LEFT_RESIZE.style.left = "-5px";
         TOP_LEFT_RESIZE.style.top = "-5px";
         TOP_LEFT_RESIZE.style.cursor = "nw-resize";
+        TOP_LEFT_RESIZE.id = `${this.name.replace(/\W/g, "")}_top_left_resize`;
 
         const TOP_RIGHT_RESIZE = document.createElement("div");
         TOP_RIGHT_RESIZE.style.width = "10px";
@@ -206,6 +207,7 @@ class RWM_Window {
         TOP_RIGHT_RESIZE.style.left = `${this.width - 5}px`;
         TOP_RIGHT_RESIZE.style.top = "-5px";
         TOP_RIGHT_RESIZE.style.cursor = "ne-resize";
+        TOP_RIGHT_RESIZE.id = `${this.name.replace(/\W/g, "")}_top_right_resize`;
 
         const BOTTOM_LEFT_RESIZE = document.createElement("div");
         BOTTOM_LEFT_RESIZE.style.position = "absolute";
@@ -214,6 +216,7 @@ class RWM_Window {
         BOTTOM_LEFT_RESIZE.style.cursor = "ne-resize";
         BOTTOM_LEFT_RESIZE.style.width = "10px";
         BOTTOM_LEFT_RESIZE.style.height = "10px";
+        BOTTOM_LEFT_RESIZE.id = `${this.name.replace(/\W/g, "")}_bottom_left_resize`;
 
         const BOTTOM_RIGHT_RESIZE = document.createElement("div");
         BOTTOM_RIGHT_RESIZE.style.position = "absolute";
@@ -222,6 +225,7 @@ class RWM_Window {
         BOTTOM_RIGHT_RESIZE.style.cursor = "nw-resize";
         BOTTOM_RIGHT_RESIZE.style.width = "10px";
         BOTTOM_RIGHT_RESIZE.style.height = "10px";
+        BOTTOM_RIGHT_RESIZE.id = `${this.name.replace(/\W/g, "")}_bottom_right_resize`;
 
         BOTTOM_RIGHT_RESIZE.onmousedown = (ev) => {
             this.resize_part = "br"; //* Bottom Right
@@ -237,6 +241,7 @@ class RWM_Window {
         TOP_RESIZE.style.width = `${this.width - 10}px`;
         TOP_RESIZE.style.height = "10px";
         TOP_RESIZE.style.cursor = "ns-resize"
+        TOP_RESIZE.id = `${this.name.replace(/\W/g, "")}_top_resize`;
 
         const LEFT_RESIZE = document.createElement("div");
         LEFT_RESIZE.style.position = "absolute";
@@ -245,6 +250,7 @@ class RWM_Window {
         LEFT_RESIZE.style.width = "10px";
         LEFT_RESIZE.style.height = `${this.height - 10}px`;
         LEFT_RESIZE.style.cursor = "ew-resize";
+        LEFT_RESIZE.id = `${this.name.replace(/\W/g, "")}_left_resize`;
 
         const RIGHT_RESIZE = document.createElement("div");
         RIGHT_RESIZE.style.position = "absolute";
@@ -253,7 +259,14 @@ class RWM_Window {
         RIGHT_RESIZE.style.width = "10px";
         RIGHT_RESIZE.style.height = `${this.height - 10}px`;
         RIGHT_RESIZE.style.cursor = "ew-resize";
-        
+        RIGHT_RESIZE.id = `${this.name.replace(/\W/g, "")}_right_resize`;
+
+        RIGHT_RESIZE.onmousedown = (ev) => {
+            this.resize_part = "r"; //* Right
+            this.resizing = true;
+            this.offsetX = ev.offsetX;
+        }
+
         const BOTTOM_RESIZE = document.createElement("div");
         BOTTOM_RESIZE.style.position = "absolute";
         BOTTOM_RESIZE.style.left = "5px";
@@ -261,6 +274,13 @@ class RWM_Window {
         BOTTOM_RESIZE.style.width = `${this.width - 10}px`;
         BOTTOM_RESIZE.style.height = "10px";
         BOTTOM_RESIZE.style.cursor = "ns-resize"
+        BOTTOM_RESIZE.id = `${this.name.replace(/\W/g, "")}_bottom_resize`;
+
+        BOTTOM_RESIZE.onmousedown = (ev) => {
+            this.resize_part = "b"; //* Bottom Right
+            this.resizing = true;
+            this.offsetY = ev.offsetY;
+        }
         
         BORDER_DIV.appendChild(HOLDER_DIV);
         BORDER_DIV.appendChild(TOP_LEFT_RESIZE);
@@ -313,6 +333,17 @@ class RWM_Window {
         const MINIMIZE_BUTTON = document.getElementById(`${this.name.replace(/\W/g, "")}_minimize_button_div`);
         const MAXIMIZE_BUTTON = document.getElementById(`${this.name.replace(/\W/g, "")}_maximize_button_div`);
 
+
+        const TOP_LEFT_RESIZE = document.getElementById(`${this.name.replace(/\W/g, "")}_top_left_resize`);
+        const TOP_RIGHT_RESIZE = document.getElementById(`${this.name.replace(/\W/g, "")}_top_right_resize`);
+        const BOTTOM_LEFT_RESIZE = document.getElementById(`${this.name.replace(/\W/g, "")}_bottom_left_resize`);
+        const BOTTOM_RIGHT_RESIZE = document.getElementById(`${this.name.replace(/\W/g, "")}_bottom_right_resize`);
+
+        const LEFT_RESIZE = document.getElementById(`${this.name.replace(/\W/g, "")}_left_resize`);
+        const RIGHT_RESIZE = document.getElementById(`${this.name.replace(/\W/g, "")}_right_resize`);
+        const BOTTOM_RESIZE = document.getElementById(`${this.name.replace(/\W/g, "")}_bottom_resize`);
+        const TOP_RESIZE = document.getElementById(`${this.name.replace(/\W/g, "")}_top_resize`);
+
         BORDER_DIV.style.width = `${this.width}px`;
         BORDER_DIV.style.height = `${this.height}px`;
 
@@ -324,6 +355,34 @@ class RWM_Window {
         CLOSE_BUTTON.style.left = `${this.width - 35}px`;
         MINIMIZE_BUTTON.style.left = `${this.width - 95}px`;
         MAXIMIZE_BUTTON.style.left = `${this.width - 65}px`;
+
+        BOTTOM_RESIZE.style.left = "5px";
+        BOTTOM_RESIZE.style.top = `${this.height - 5}px`;
+        BOTTOM_RESIZE.style.width = `${this.width - 10}px`;
+
+        RIGHT_RESIZE.style.left = `${this.width - 5}px`;
+        RIGHT_RESIZE.style.top = "5px";
+        RIGHT_RESIZE.style.height = `${this.height - 10}px`;
+        
+        LEFT_RESIZE.style.left = "-5px";
+        LEFT_RESIZE.style.top = "5px";
+        LEFT_RESIZE.style.height = `${this.height - 10}px`;
+
+        TOP_RESIZE.style.left = "5px";
+        TOP_RESIZE.style.top = "-5px";
+        TOP_RESIZE.style.width = `${this.width - 10}px`;
+
+        TOP_RIGHT_RESIZE.style.left = `${this.width - 5}px`;
+        TOP_RIGHT_RESIZE.style.top = "-5px";
+
+        TOP_LEFT_RESIZE.style.left = "-5px";
+        TOP_LEFT_RESIZE.style.top = "-5px";
+
+        BOTTOM_LEFT_RESIZE.style.left = "-5px";
+        BOTTOM_LEFT_RESIZE.style.top = `${this.height - 5}px`;
+
+        BOTTOM_RIGHT_RESIZE.style.left = `${this.width - 5}px`;
+        BOTTOM_RIGHT_RESIZE.style.top = `${this.height - 5}px`;
     }
 
     //* ------- Math for resizing windows~ ------- 
@@ -337,12 +396,38 @@ class RWM_Window {
     br(ev)  {
         const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
 
-        console.log(this.offsetX);
-
         this.width = Math.abs((ev.x + this.offsetX) - Number(BORDER_DIV.style.left.replace("px","")));
         this.height = Math.abs((ev.y + this.offsetY) - Number(BORDER_DIV.style.top.replace("px", "")));
 
-        console.log(this.width);
+        this.resizeWindow();
+    }
+
+    /**
+     * Bottom
+     * 
+     * @param {MouseEvent} ev
+     * 
+     * @returns {Array<Number, Number>} 
+     */
+    b(ev) {
+        const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
+
+        this.height = Math.abs((ev.y + this.offsetY) - Number(BORDER_DIV.style.top.replace("px", "")));
+
+        this.resizeWindow();
+    }
+
+    /**
+     *  Right
+     * 
+     * @param {MouseEvent} ev
+     * 
+     * @returns {Array<Number, Number>} 
+     */
+    r(ev)  {
+        const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
+
+        this.width = Math.abs((ev.x + this.offsetX) - Number(BORDER_DIV.style.left.replace("px","")));
 
         this.resizeWindow();
     }
