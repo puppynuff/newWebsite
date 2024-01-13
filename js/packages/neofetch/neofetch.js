@@ -9,8 +9,6 @@ applications.neofetch = (_command, args, TERMINAL) => {
     let cookie_enabled = navigator.cookieEnabled;
     let screen_width = screen.width;
     let screen_height = screen.height;
-    let window_width = document.width
-    let window_height = document.height;
 
     let infoTable = `    ██              ▒▒▒▒                                                                                             OS:               ${OS}
     ██            ▓▓▓▓▓▓▒▒▒▒                                    ▓▓▓▓▓▓▓▓▓▓▓▓                                         Browser Language: ${browser_language}

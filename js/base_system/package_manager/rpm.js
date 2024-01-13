@@ -10,6 +10,12 @@ let packages = {
         name: "RWM",
         description: "Ruby Window Manager, makes a desktop environment",
         files: ["/js/packages/rwm/rwm.js", "/js/packages/rwm/windows/window.js"]
+    },
+
+    blahaj: {
+        name: "blahaj",
+        description: "Prints an ascii art of blahaj :D",
+        files: ["/js/packages/blahaj/blahaj.js"]
     }
 };
 

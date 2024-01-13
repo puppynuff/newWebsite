@@ -4,7 +4,7 @@ let open_windows = [];
 
 // At some point I need to make a desktop environment file thing.
 // But for now this will work.
-applications.rwm = (_command, args, TERMINAL) => {
+applications.rwm = (_command, _args, TERMINAL) => {
     TERMINAL.stop();
     const BACKGROUND_DIV = document.createElement("div");
 
