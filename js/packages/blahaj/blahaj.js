@@ -42,10 +42,8 @@ applications.blahaj = (_command, args, TERMINAL) => {
         }).build();
 
         color_thing += 1;
-        console.log(colors.length);
         if(color_thing == colors.length) color_thing = 0;
 
-        console.log(color_thing);
-        console.log(colors[i]);
+        console.log(colors[color_thing]);
     }
 }

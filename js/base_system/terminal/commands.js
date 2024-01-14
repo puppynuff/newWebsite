@@ -5,6 +5,7 @@ applications.clear = (_command, _args, TERMINAL) => {
 }
 
 applications.header = (_command, args, TERMINAL) => {
+    if(!args[1]) args = ["", "white"];
     for(let i = 0; i < openingHeader.length; i++) {
         new Line(openingHeader[i], args[1], TERMINAL, {
             color: args[1],
