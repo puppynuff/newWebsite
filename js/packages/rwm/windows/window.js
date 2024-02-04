@@ -4,8 +4,8 @@
 
 class RWM_Window {
     /**
-     * 
-     * @param {string} name 
+     *
+     * @param {string} name
      */
     constructor(name, {
         width = 800,
@@ -39,7 +39,7 @@ class RWM_Window {
 
         const HOLDER_DIV = document.createElement("div");
         HOLDER_DIV.id = `${this.name.replace(/\W/g, "")}_holder_div`;
-        
+
         HOLDER_DIV.style.height = `${this.height}px`;
         HOLDER_DIV.style.width = `${this.width}px`;
         HOLDER_DIV.style.borderRadius = `5px`;
@@ -47,7 +47,7 @@ class RWM_Window {
         HOLDER_DIV.style.position = "relative";
         HOLDER_DIV.style.left = "2px";
         HOLDER_DIV.style.top = "2px";
-        
+
         const TOP_DIV = document.createElement(`div`);
         TOP_DIV.id = `${this.name.replace(/\W/g, "")}_top_div`;
 
@@ -58,7 +58,7 @@ class RWM_Window {
         TOP_DIV.style.top = `0px`;
         TOP_DIV.style.left = `0px`;
         TOP_DIV.style.borderRadius = `5px 0px 0px 0px`;
-        
+
         const CLOSE_BUTTON = document.createElement("button");
         CLOSE_BUTTON.id = `${this.name.replace(/\W/g, "")}_close_button_div`;
 
@@ -103,7 +103,7 @@ class RWM_Window {
         MINIMIZE_BUTTON.onclick = (_ev) => {
             document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`).hidden = true;
         }
-        
+
         const MAXIMIZE_BUTTON = document.createElement("button");
         MAXIMIZE_BUTTON.id = `${this.name.replace(/\W/g, "")}_maximize_button_div`;
 
@@ -130,22 +130,22 @@ class RWM_Window {
 
             this.width = document.body.clientWidth;
             this.height  = document.body.clientHeight;
-            
+
             BORDER_DIV.style.left = "0px";
             BORDER_DIV.style.top = "0px";
-            
+
             this.resizeWindow();
-        } 
-        
+        }
+
         // TODO Figure out how to change this dynamically
-        //! I've tried 9 different ways they say it can be changed dynamically, and none of them work? 
+        //! I've tried 9 different ways they say it can be changed dynamically, and none of them work?
         //! I don't understand why, but it wasted 50 minutes of my life trying to change the color of an SVG.
         const MAXIMIZE_ICON = document.createElement("img");
         MAXIMIZE_ICON.style.color = "#D7289D";
         MAXIMIZE_ICON.src = `/photos/maximize.svg`;
         MAXIMIZE_ICON.height = "20";
         MAXIMIZE_ICON.width = "20";
-        
+
         const WINDOW_TITLE = document.createElement("pre");
         WINDOW_TITLE.textContent = this.name;
         WINDOW_TITLE.style.color = "#D7289D";
@@ -155,7 +155,7 @@ class RWM_Window {
         WINDOW_TITLE.style.left = "35px";
 
         this.should_move = false;
-        
+
         TOP_DIV.onmousedown = (ev) => {
             let x_difference = 0;
             if(this.maximized == true) {
@@ -176,7 +176,7 @@ class RWM_Window {
             this.offsetX = ev.offsetX - x_difference;
             this.offsetY = ev.offsetY;
         }
-        
+
         TOP_DIV.onmouseup = (_ev) => {
             this.should_move = false;
         }
@@ -189,8 +189,6 @@ class RWM_Window {
         WINDOW_ICON.style.left = "0px";
         WINDOW_ICON.style.top = "0px";
 
-
-
         const TOP_LEFT_RESIZE = document.createElement("div");
         TOP_LEFT_RESIZE.style.width = "10px";
         TOP_LEFT_RESIZE.style.height = "10px";
@@ -199,6 +197,13 @@ class RWM_Window {
         TOP_LEFT_RESIZE.style.top = "-5px";
         TOP_LEFT_RESIZE.style.cursor = "nw-resize";
         TOP_LEFT_RESIZE.id = `${this.name.replace(/\W/g, "")}_top_left_resize`;
+
+        TOP_LEFT_RESIZE.onmousedown = (ev) => {
+            this.resize_part = "tl";
+            this.resizing = true;
+            this.offsetY = ev.offsetY;
+            this.offsetX = ev.offsetX;
+        }
 
         const TOP_RIGHT_RESIZE = document.createElement("div");
         TOP_RIGHT_RESIZE.style.width = "10px";
@@ -209,6 +214,13 @@ class RWM_Window {
         TOP_RIGHT_RESIZE.style.cursor = "ne-resize";
         TOP_RIGHT_RESIZE.id = `${this.name.replace(/\W/g, "")}_top_right_resize`;
 
+        TOP_RIGHT_RESIZE.onmousedown = (ev) => {
+            this.resize_part = "tr";
+            this.resizing = true;
+            this.offsetY = ev.offsetY;
+            this.offsetX = ev.offsetX;
+        }
+
         const BOTTOM_LEFT_RESIZE = document.createElement("div");
         BOTTOM_LEFT_RESIZE.style.position = "absolute";
         BOTTOM_LEFT_RESIZE.style.left = "-5px";
@@ -217,6 +229,13 @@ class RWM_Window {
         BOTTOM_LEFT_RESIZE.style.width = "10px";
         BOTTOM_LEFT_RESIZE.style.height = "10px";
         BOTTOM_LEFT_RESIZE.id = `${this.name.replace(/\W/g, "")}_bottom_left_resize`;
+
+        BOTTOM_LEFT_RESIZE.onmousedown = (ev) => {
+            this.resize_part = "bl";
+            this.resizing = true;
+            this.offsetX = ev.offsetX;
+            this.offsetY = ev.offsetY;
+        }
 
         const BOTTOM_RIGHT_RESIZE = document.createElement("div");
         BOTTOM_RIGHT_RESIZE.style.position = "absolute";
@@ -243,6 +262,12 @@ class RWM_Window {
         TOP_RESIZE.style.cursor = "ns-resize"
         TOP_RESIZE.id = `${this.name.replace(/\W/g, "")}_top_resize`;
 
+        TOP_RESIZE.onmousedown = (ev) => {
+            this.resize_part = "t";
+            this.resizing = true;
+            this.offsetY = ev.offsetY;
+        }
+
         const LEFT_RESIZE = document.createElement("div");
         LEFT_RESIZE.style.position = "absolute";
         LEFT_RESIZE.style.left = "-5px";
@@ -251,6 +276,12 @@ class RWM_Window {
         LEFT_RESIZE.style.height = `${this.height - 10}px`;
         LEFT_RESIZE.style.cursor = "ew-resize";
         LEFT_RESIZE.id = `${this.name.replace(/\W/g, "")}_left_resize`;
+
+        LEFT_RESIZE.onmousedown = (ev) => {
+            this.resize_part = "l"; //* left
+            this.resizing = true;
+            this.offsetX = ev.offsetX;
+        }
 
         const RIGHT_RESIZE = document.createElement("div");
         RIGHT_RESIZE.style.position = "absolute";
@@ -281,7 +312,7 @@ class RWM_Window {
             this.resizing = true;
             this.offsetY = ev.offsetY;
         }
-        
+
         BORDER_DIV.appendChild(HOLDER_DIV);
         BORDER_DIV.appendChild(TOP_LEFT_RESIZE);
         BORDER_DIV.appendChild(TOP_RIGHT_RESIZE);
@@ -296,22 +327,22 @@ class RWM_Window {
         HOLDER_DIV.appendChild(MINIMIZE_BUTTON);
         HOLDER_DIV.appendChild(MAXIMIZE_BUTTON);
         HOLDER_DIV.appendChild(TOP_DIV);
-        
+
         MAXIMIZE_BUTTON.appendChild(MAXIMIZE_ICON);
-        
+
         TOP_DIV.appendChild(WINDOW_TITLE);
         TOP_DIV.appendChild(WINDOW_ICON);
 
         document.addEventListener("mouseup", (ev) => {
             this.resizing = false;
         })
-        
+
         document.getElementById("background-div").appendChild(BORDER_DIV);
     }
 
     /**
-     * 
-     * @param {MouseEvent} mouse_pos 
+     *
+     * @param {MouseEvent} mouse_pos
      */
     handleMovement(mouse_pos) {
         const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
@@ -321,7 +352,7 @@ class RWM_Window {
 
     handleResize(ev) {
         if(!this.resizing) return;
-        
+
         (this[this.resize_part])(ev);
     }
 
@@ -363,7 +394,7 @@ class RWM_Window {
         RIGHT_RESIZE.style.left = `${this.width - 5}px`;
         RIGHT_RESIZE.style.top = "5px";
         RIGHT_RESIZE.style.height = `${this.height - 10}px`;
-        
+
         LEFT_RESIZE.style.left = "-5px";
         LEFT_RESIZE.style.top = "5px";
         LEFT_RESIZE.style.height = `${this.height - 10}px`;
@@ -385,13 +416,13 @@ class RWM_Window {
         BOTTOM_RIGHT_RESIZE.style.top = `${this.height - 5}px`;
     }
 
-    //* ------- Math for resizing windows~ ------- 
+    //* ------- Math for resizing windows~ -------
     /**
      *  Bottom Right
-     * 
+     *
      * @param {MouseEvent} ev
-     * 
-     * @returns {Array<Number, Number>} 
+     *
+     * @returns {Array<Number, Number>}
      */
     br(ev)  {
         const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
@@ -404,10 +435,10 @@ class RWM_Window {
 
     /**
      * Bottom
-     * 
+     *
      * @param {MouseEvent} ev
-     * 
-     * @returns {Array<Number, Number>} 
+     *
+     * @returns {Array<Number, Number>}
      */
     b(ev) {
         const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
@@ -419,15 +450,105 @@ class RWM_Window {
 
     /**
      *  Right
-     * 
+     *
      * @param {MouseEvent} ev
-     * 
-     * @returns {Array<Number, Number>} 
      */
     r(ev)  {
         const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
 
         this.width = Math.abs((ev.x + this.offsetX) - Number(BORDER_DIV.style.left.replace("px","")));
+
+        this.resize = this.resizeWindow();
+    }
+
+    /**
+     *  left
+     *
+     * @param {MouseEvent} ev
+    */
+    l(ev) {
+        const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
+
+        let rightX = Number(BORDER_DIV.style.left.replace("px", "")) + this.width;
+
+        this.width = rightX - ev.x;
+
+        BORDER_DIV.style.left = `${rightX - this.width}px`;
+
+        this.resizeWindow();
+    }
+
+
+    /**
+     * Bottom left
+     *
+     * @param {MouseEvent} ev
+    */
+    bl(ev) {
+        const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
+
+        let rightX = Number(BORDER_DIV.style.left.replace("px", "")) + this.width;
+
+        this.width = rightX - ev.x;
+
+        BORDER_DIV.style.left = `${rightX - this.width}px`;
+
+        this.height = Math.abs((ev.y + this.offsetY) - Number(BORDER_DIV.style.top.replace("px", "")));
+
+        this.resizeWindow();
+    }
+
+    /**
+     * top
+     *
+     * @param {MouseEvent} ev
+    */
+    t(ev) {
+        const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
+
+        let bottomY = Number(BORDER_DIV.style.top.replace("px", "")) + this.height;
+
+        this.height = bottomY - ev.y;
+
+        BORDER_DIV.style.top = `${bottomY - this.height}px`;
+
+        this.resizeWindow();
+    }
+
+    /**
+     * top left
+     *
+     * @param {MouseEvent} ev
+    */
+    tl(ev) {
+        const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
+
+        let rightX = Number(BORDER_DIV.style.left.replace("px", "")) + this.width;
+        let bottomY = Number(BORDER_DIV.style.top.replace("px", "")) + this.height;
+
+        this.width = rightX - ev.x;
+        this.height = bottomY - ev.y;
+
+        BORDER_DIV.style.left = `${rightX - this.width}px`;
+        BORDER_DIV.style.top = `${bottomY - this.height}px`;
+
+        this.resizeWindow();
+    }
+
+    /**
+     * top right
+     *
+     * @param {MouseEvent} ev
+    */
+    tr(ev) {
+        const BORDER_DIV = document.getElementById(`${this.name.replace(/\W/g, "")}_border_div`);
+
+        let bottomY = Number(BORDER_DIV.style.top.replace("px", "")) + this.height;
+
+        this.height = bottomY - ev.y;
+        this.width = Math.abs((ev.x + this.offsetX) - (Number(BORDER_DIV.style.left.replace("px", ""))));
+
+        BORDER_DIV.style.top = `${bottomY - this.height}px`;
 
         this.resizeWindow();
     }
