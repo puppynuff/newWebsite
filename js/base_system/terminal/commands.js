@@ -22,3 +22,22 @@ applications.help = (_command, args, TERMINAL) => {
     new Line("header:   Shows the header", "white", TERMINAL).build();
     new Line("rpm   :   Ruby Package Manager", "white", TERMINAL).build();
 }
+
+applications.setup = (_command, args, TERMINAL) => {
+    if(!args[1]) return new Line("Missing args! do \"stup help\" to get options!", "white", TERMINAL).build();
+
+    if(args[1] == "desktop") {
+        new Line("setup desktop: Automatically sets up the desktop environment for you!", "white", TERMINAL).build();
+        new Line("rpm install rwm", "white", TERMINAL).build();
+        applications.rpm("", ["", "install", "rwm"], TERMINAL).then(async () => {
+            await sleep(50);
+
+            applications.rwm("", [], TERMINAL)
+        });
+        return;
+    }
+}
+
+function sleep(ms = 0) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

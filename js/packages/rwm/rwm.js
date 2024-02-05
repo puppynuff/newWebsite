@@ -29,13 +29,21 @@ applications.rwm = (_command, _args, TERMINAL) => {
     task_bar_div.style.width = "100%";
     task_bar_div.style.position = "fixed";
     task_bar_div.style.top = `${window.innerHeight - 50}px`;
-
-    window.onresize = (_ev) => {task_bar_div.style.top = `${window.innerHeight - 50}px`};
+    task_bar_div.id = "rwm_task_bar";
 
     BACKGROUND_DIV.appendChild(task_bar_div);
 
-    // Work on windows next.
+    taskbar = new Taskbar();
 
+    window.onresize = (_ev) => {task_bar_div.style.top = `${window.innerHeight - 50}px`};
+
+    taskbar.addApplication("app_store", "/photos/application_images/app_store.svg", () => {
+        if(document.getElementById("AppStore_border_div")) return document.getElementById("AppStore_border_div").hidden = !document.getElementById("AppStore_border_div").hidden;
+
+        new app_store();
+    });
+
+    // Work on windows next.
     document.addEventListener("mousemove", (ev) => {
         for(let i = 0; i < open_windows.length; i++) {
             if(open_windows[i].resizing) {
@@ -48,10 +56,4 @@ applications.rwm = (_command, _args, TERMINAL) => {
             open_windows[i].handleMovement(ev);
         }
     })
-
-    const testing_window = new RWM_Window("Testing~", {
-        width: 800,
-        height: 800,
-        icon_url: "/photos/testing_icon.jpg"
-    });
 }

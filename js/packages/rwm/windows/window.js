@@ -10,6 +10,8 @@ class RWM_Window {
     constructor(name, {
         width = 800,
         height = 800,
+        min_width = 400,
+        min_height = 400,
         top_color = "#181818",
         icon_url = "/photos/no_icon.png"
     }) {
@@ -19,6 +21,9 @@ class RWM_Window {
         this.maximized = false;
         this.top_color = top_color;
         this.icon_url = icon_url;
+
+        this.min_width = min_width;
+        this.min_height = min_height;
 
         this.array_pos = open_windows.length;
         this.createWindow();
@@ -374,6 +379,9 @@ class RWM_Window {
         const RIGHT_RESIZE = document.getElementById(`${this.name.replace(/\W/g, "")}_right_resize`);
         const BOTTOM_RESIZE = document.getElementById(`${this.name.replace(/\W/g, "")}_bottom_resize`);
         const TOP_RESIZE = document.getElementById(`${this.name.replace(/\W/g, "")}_top_resize`);
+
+        if(this.height < this.min_height) this.height = this.min_height;
+        if(this.width < this.min_width) this.width = this.min_width;
 
         BORDER_DIV.style.width = `${this.width}px`;
         BORDER_DIV.style.height = `${this.height}px`;

@@ -9,8 +9,9 @@ let packages = {
     rwm: {
         name: "RWM",
         description: "Ruby Window Manager, makes a desktop environment",
-        files: ["/js/packages/rwm/rwm.js", "/js/packages/rwm/windows/window.js"]
+        files: ["/js/packages/rwm/rwm.js", "/js/packages/rwm/windows/window.js", "/js/packages/rwm/taskbar/taskbar.js", "/js/packages/rwm/applications/app_store/app_store.js"]
     },
+
 
     blahaj: {
         name: "blahaj",
@@ -19,13 +20,14 @@ let packages = {
     }
 };
 
-applications.rpm = (_command, args, TERMINAL) => {
+applications.rpm = async (_command, args, TERMINAL) => {
     switch(args[1]) {
         case "install": return installPackages(args, TERMINAL);
         case "help": {
             new Line("rpm install [package] (Do rpm packages to see the available packages)", "red", TERMINAL).build();
             return;
         }
+
 
         case "packages": return getPackages(TERMINAL);
         default: {
@@ -54,7 +56,7 @@ function installPackages(args, TERMINAL) {
         }
     }
 
-    return;
+    return applications[args[2]];
 }
 
 function getPackages(TERMINAL) {
