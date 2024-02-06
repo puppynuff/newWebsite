@@ -6,6 +6,11 @@ let open_windows = [];
 // But for now this will work.
 applications.rwm = (_command, _args, TERMINAL) => {
     TERMINAL.stop();
+
+    document.body.style.overflow = "hidden";
+
+    document.getElementsByTagName("html")[0].style.overflow = "hidden";
+
     const BACKGROUND_DIV = document.createElement("div");
 
     BACKGROUND_DIV.style.width = "100%";
