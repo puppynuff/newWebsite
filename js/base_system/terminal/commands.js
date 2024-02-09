@@ -29,6 +29,7 @@ applications.setup = (_command, args, TERMINAL) => {
     if(args[1] == "desktop") {
         new Line("setup desktop: Automatically sets up the desktop environment for you!", "white", TERMINAL).build();
         new Line("rpm install rwm", "white", TERMINAL).build();
+        new Line("If the desktop environment doesn't load correctly, run \"rwm\"", "white", TERMINAL).build();
         applications.rpm("", ["", "install", "rwm"], TERMINAL).then(async () => {
             await sleep(50);
 
