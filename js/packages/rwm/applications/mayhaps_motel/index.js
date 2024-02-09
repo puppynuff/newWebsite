@@ -1,3 +1,8 @@
+let scene_locations = [
+    "/js/packages/rwm/applications/mayhaps_motel/scenes/opening_scene.js"
+];
+
+
 taskbar.addApplication("Mayhaps Motel: The Dating Sim", "/photos/application_images/mayhaps.webp", () => {
     const mayhaps_motel_window_border = document.getElementById("MayhapsMotelTheDatingSim_border_div");
     if(mayhaps_motel_window_border != undefined) {
@@ -5,7 +10,7 @@ taskbar.addApplication("Mayhaps Motel: The Dating Sim", "/photos/application_ima
         return;
     }
 
-    const mayhaps_window = new RWM_Window("Mayhaps Motel: The Dating Sim", {
+    const _mayhaps_window = new RWM_Window("Mayhaps Motel: The Dating Sim", {
         width: 800,
         height: 800,
         min_width: 800,
@@ -14,11 +19,19 @@ taskbar.addApplication("Mayhaps Motel: The Dating Sim", "/photos/application_ima
         icon_url: "/photos/application_images/mayhaps.webp"
     });
 
+    // Load the scenes
+    for(let i = 0; i < scene_locations.length; i++){
+        let scene_script = document.createElement("script");
+        scene_script.src = scene_locations[i];
 
-    title_screen(mayhaps_window);
+        document.head.appendChild(scene_script);
+    }
+
+
+    title_screen();
 });
 
-function title_screen(mayhaps_window) {
+function title_screen() {
     const base_systems = document.createElement("script");
     base_systems.src = "/js/packages/rwm/applications/mayhaps_motel/base_systems.js"
 
@@ -37,14 +50,10 @@ function title_screen(mayhaps_window) {
     start_button.textContent = "start";
     start_button.id = "mayhaps_motel_start_button";
 
-
     start_button.onclick = () => {
         render_base_box();
-        render_text([{
-            text: "In progress :3",
-            color: "blue",
-            font_size: "large"
-        }]);
+
+        handle_scene_1();
     }
 
     const exit_button = document.createElement("button");
