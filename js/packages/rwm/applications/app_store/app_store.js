@@ -4,7 +4,7 @@ class app_store {
     constructor() {
         this.application_list = [];
 
-        const app_store_window = new RWM_Window("App Store", {
+        const _app_store_window = new RWM_Window("App Store", {
             width: 800,
             height: 800,
             min_width: 400,
@@ -17,7 +17,7 @@ class app_store {
             name: "Mayhaps Motel, The Dating Sim",
             description: "The official Mayhaps Motel Dating Sim! (2/14/24!)",
             icon_url: "/photos/application_images/mayhaps.webp",
-            name_location: "250px",
+            name_location: "210px",
             files: ["/js/packages/rwm/applications/mayhaps_motel/index.js"]
         })
 
