@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: /js/
+Disallow: /css/
+Disallow: /photos/
+Disallow: /todo.txt
