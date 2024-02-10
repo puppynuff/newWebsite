@@ -10,8 +10,22 @@ function render_base_box() {
     text_holder.style.position = "relative";
     text_holder.style.top = "calc(100% - 220px)";
 
+    let character_image = document.createElement("img");
+    character_image.style.right = "10px";
+    character_image.style.bottom = "220px";
+    character_image.style.height = "calc(100% - 220px)";
+    character_image.style.position = "absolute";
+    character_image.id = "mayhaps_character_image_holder";
+
 
     document.getElementById("mayhaps_game_window_div").appendChild(text_holder);
+    document.getElementById("mayhaps_game_window_div").appendChild(character_image);
+}
+
+function render_character(character_name, character_outfit, character_mood) {
+    let character_image = document.getElementById("mayhaps_character_image_holder");
+
+    character_image.src = `/photos/application_images/mayhaps_motel_dating_sim/characters/${character_name}/${character_outfit}/${character_name}_${character_mood}_${character_outfit}.png`;
 }
 
 function callback_handle_text(text_portion, callback) {
@@ -40,7 +54,7 @@ function create_buttons(button_data) {
 
     const BUTTON_HOLDER = document.createElement("div");
     BUTTON_HOLDER.style.position = "absolute";
-    BUTTON_HOLDER.style.top = "50%";
+    BUTTON_HOLDER.style.top = "25%";
     BUTTON_HOLDER.style.left = "50%";
     BUTTON_HOLDER.style.transform = "translate(-50%, -50%)";
     BUTTON_HOLDER.id = "mayhaps_button_holder";
