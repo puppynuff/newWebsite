@@ -1,0 +1,64 @@
+html {
+    background-color: #262626;
+}
+
+#holder_div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 75%;
+    text-align: center;
+}
+
+#opening_profile_picture_glow {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    background-color: #0000;
+    box-shadow: 0 0 10px 1px #ff0095;
+}
+
+#name_text {
+    color: hotpink;
+    font-family: 'Dynapuff', cursive;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#intro_text_1 {
+    color: hotpink;
+    font-family: 'Lucida Console', monospace;
+    margin: 0;
+}
+
+#intro_text_2 {
+    color: lightblue;
+    font-family: 'Lucida Console', monospace;
+    font-size: "small";
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.base_button {
+    border-radius: 3px;
+    background: none; 
+    border: solid; 
+    border-width: 1px; 
+    color: white; 
+    width: 50%; 
+    font-size: 20px;
+    margin: 2px;
+}
+
+.base_button:hover {
+    border-color: gray !important;
+}

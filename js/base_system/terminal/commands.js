@@ -39,6 +39,30 @@ applications.setup = (_command, args, TERMINAL) => {
     }
 }
 
+applications.whoami = (_command, _args, TERMINAL) => {
+    new Line("Hello my name is Shiro.", "hotpink", TERMINAL).build();
+    new Line("You might also find me as PuppyNuff", "blue", TERMINAL).build();
+    new Line("Development Background:", "red", TERMINAL).build();
+    new Line("I have 3 years of experience in Javascript and Typescript, working on discord bots and multiple scrapped websites.", "white", TERMINAL).build();
+    new Line("I have worked on some projects in Java, C++, Rust, C#, Python, and Ruby", "white", TERMINAL).build();
+    new Line("What I do:", "red", TERMINAL).build();
+    new Line("I normally work on back-end-software, for websites, bots, and sometimes AI", "white", TERMINAL).build();
+    new Line("Normally if I am not working on my software, I am playing games, writing, or drawing.", "white", TERMINAL).build();
+    new Line("Who Am I?", "red", TERMINAL).build();
+    new Line("I'm a software engineer, and currently I haven't founded or co-founded any long term projects.", "white", TERMINAL).build();
+    new Line("I would like to get a job in Computer Science, or game development.", "white", TERMINAL).build();
+    new Line("I sometimes write stories, design characters, and play some competitive games.", "white", TERMINAL).build();
+    new Line("I'm not the greatest at social interactions, so it might be a good idea to use tone tags and things when talking to me.", "white", TERMINAL).build();
+    new Line("Fun facts:", "white", TERMINAL).build();
+    new Line("1: My favorite animal is the artic fox.", "white", TERMINAL).build();
+    new Line("2: My favorite band is The Red Hot chili peppers", "white", TERMINAL).build();
+    new Line("3: My favorite game is A Hat in Time or Ultrakill.", "white", TERMINAL).build();
+
+    return;
+
+}
+
+
 function sleep(ms = 0) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
