@@ -1,3 +1,4 @@
+// ~~~~~ Rendering Things ~~~~~
 function render_base_box() {
     document.getElementById("mayhaps_motel_start_button").hidden = true;
     document.getElementById("mayhaps_motel_exit_button").hidden = true;
@@ -20,6 +21,14 @@ function render_base_box() {
 
     document.getElementById("mayhaps_game_window_div").appendChild(text_holder);
     document.getElementById("mayhaps_game_window_div").appendChild(character_image);
+}
+
+function render_background(background_location) {
+    const MAYHAPS_BACKGROUND_DIV = document.getElementById("mayhaps_game_window_div");
+    MAYHAPS_BACKGROUND_DIV.style.backgroundImage = background_location;
+    MAYHAPS_BACKGROUND_DIV.style.backgroundSize = "contain";
+    MAYHAPS_BACKGROUND_DIV.style.backgroundRepeat = "no-repeat";
+    MAYHAPS_BACKGROUND_DIV.style.backgroundPosition = "center";
 }
 
 function render_character(character_name, character_outfit, character_mood) {
@@ -47,49 +56,6 @@ function callback_handle_text(text_portion, callback) {
     }
 
     MAYHAPS_TEXT_HOLDER.click();
-}
-
-function create_buttons(button_data) {
-    const GAME_HOLDER = document.getElementById("mayhaps_game_window_div");
-
-    const BUTTON_HOLDER = document.createElement("div");
-    BUTTON_HOLDER.style.position = "absolute";
-    BUTTON_HOLDER.style.top = "25%";
-    BUTTON_HOLDER.style.left = "50%";
-    BUTTON_HOLDER.style.transform = "translate(-50%, -50%)";
-    BUTTON_HOLDER.id = "mayhaps_button_holder";
-    BUTTON_HOLDER.style.width = "50%";
-    GAME_HOLDER.appendChild(BUTTON_HOLDER);
-
-    for(let i = 0; i < button_data.length; i++) {
-        const button = document.createElement("button");
-        button.textContent = button_data[i].text;
-        button.style.color = button_data[i].text_color ?? "white";
-        button.style.background = "none";
-        button.style.borderStyle = "solid";
-        button.onclick = button_data[i].onclick;
-        button.style.width = "calc(100% - 20px)";
-        button.style.position = "relative";
-        button.style.left = "10px";
-        button.style.fontFamily = "\'Public Pixel\', sans-serif";
-        button.style.borderColor = button_data[i].color ?? "white";
-
-        button.onmouseenter = () => {
-            button.style.borderColor = "gray";
-        }
-
-        button.onmouseleave = () => {
-            button.style.borderColor = button_data[i].color ?? "white";
-        }
-
-
-        BUTTON_HOLDER.appendChild(button);
-    }
-}
-
-// Just so its one short line, since I will be using this alot.
-function remove_button_holder() {
-    document.getElementById("mayhaps_button_holder").remove();
 }
 
 // To quickly make a line from a character, that doesn't need that extra decoration
@@ -138,4 +104,93 @@ function render_text(text_array) {
 
         TEXT_HOLDER.appendChild(TEXT_ELEM);
     }
+}
+
+//~~~~~ Taking Input ~~~~~
+
+function create_buttons(button_data) {
+    const GAME_HOLDER = document.getElementById("mayhaps_game_window_div");
+
+    const BUTTON_HOLDER = document.createElement("div");
+    BUTTON_HOLDER.style.position = "absolute";
+    BUTTON_HOLDER.style.top = "25%";
+    BUTTON_HOLDER.style.left = "50%";
+    BUTTON_HOLDER.style.transform = "translate(-50%, -50%)";
+    BUTTON_HOLDER.id = "mayhaps_button_holder";
+    BUTTON_HOLDER.style.width = "50%";
+    GAME_HOLDER.appendChild(BUTTON_HOLDER);
+
+    for(let i = 0; i < button_data.length; i++) {
+        const button = document.createElement("button");
+        button.textContent = button_data[i].text;
+        button.style.color = button_data[i].text_color ?? "white";
+        button.style.background = "none";
+        button.style.borderStyle = "solid";
+        button.onclick = button_data[i].onclick;
+        button.style.width = "calc(100% - 20px)";
+        button.style.position = "relative";
+        button.style.left = "10px";
+        button.style.fontFamily = "\'Public Pixel\', sans-serif";
+        button.style.borderColor = button_data[i].color ?? "white";
+
+        button.onmouseenter = () => {
+            button.style.borderColor = "gray";
+        }
+
+        button.onmouseleave = () => {
+            button.style.borderColor = button_data[i].color ?? "white";
+        }
+
+
+        BUTTON_HOLDER.appendChild(button);
+    }
+}
+
+// Just so its one short line, since I will be using this alot.
+function remove_button_holder() {
+    document.getElementById("mayhaps_button_holder").remove();
+}
+
+// Taking text input, will require a callback though.
+function handle_text_input(question, callback) {
+    const MAYHAPS_MOTEL_GAME_WINDOW = document.getElementById("mayhaps_game_window_div");
+
+    let question_text = document.createElement("p");
+    question_text.textContent = question;
+    question_text.style.width = "100%";
+    question_text.style.fontSize = "x-large";
+    question_text.style.fontFamily = "\'Public Pixel\', sans-serif";
+    question_text.style.color = "red";
+    question_text.style.textAlign = "center";
+
+    let text_box = document.createElement("input");
+    text_box.type = "text";
+    text_box.width = "100%";
+    text_box.background = "transparent";
+    text_box.classList.add("center");
+    text_box.style.fontSize = "larger";
+    text_box.style.fontFamily = "\'Public Pixel\', sans-serif";
+    text_box.style.color = "red";
+
+    text_box.style.position = "absolute";
+    text_box.style.left = "50%";
+    text_box.style.transform = "translate(-50%)";
+
+    text_box.onkeydown = (ev) => {
+        if(ev.key === "Enter") {
+            callback(text_box.value);
+            return remove_text_box();
+        }
+    }
+
+    text_box.id = "mayhaps_question_text_box";
+    question_text.id = "mayhaps_question_text";
+
+    MAYHAPS_MOTEL_GAME_WINDOW.appendChild(question_text);
+    MAYHAPS_MOTEL_GAME_WINDOW.appendChild(text_box);
+}
+
+function remove_text_box() {
+    document.getElementById("mayhaps_question_text_box").remove();
+    document.getElementById("mayhaps_question_text").remove();
 }

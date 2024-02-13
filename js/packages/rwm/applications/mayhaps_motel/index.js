@@ -1,6 +1,11 @@
 let scene_locations = [
-    "/js/packages/rwm/applications/mayhaps_motel/scenes/opening_scene.js"
+    "/js/packages/rwm/applications/mayhaps_motel/scenes/introduction.js"
 ];
+
+// this is just info for referring to the player, and keeping track of phases.
+let user_info = {
+    name: "unknown."
+}
 
 
 taskbar.addApplication("Mayhaps Motel: The Dating Sim", "/photos/application_images/mayhaps.webp", () => {
@@ -53,7 +58,7 @@ function title_screen() {
     start_button.onclick = () => {
         render_base_box();
 
-        handle_scene_1();
+        introduction_scene();
     }
 
     const exit_button = document.createElement("button");

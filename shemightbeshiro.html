@@ -16,25 +16,162 @@ https://shemightbeshiro.carrd.co/ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue&display=swap" rel="stylesheet">    
+    <script src="/js/shemightbeshiro.js"></script>
+
+    <style>
+        body {
+            animation: fadeInAnimation ease 3s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+ 
+        h1 {
+            color: green;
+        }
+ 
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+ 
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="holder_div">
-        <div id="intro_div">
+        <div id="intro_div" style="opacity: 1;">
             <div id="opening_profile_picture_glow" class="center">
                 <img class="center" id="opening_profile_picture" src="/photos/shemightbeshiro/me_picrew.png" height="180" width="180" alt="Shiro pfp, made threw picrew"></img>
             </div>
             <h1 id="name_text">Shiro</h1>
-            <iframe class="center" width="50%" height="100" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/564326772&color=%23d200ff&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #363636;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/the-score-official" title="The Score Official" target="_blank" style="color: #313131; text-decoration: none;">The Score Official</a> · <a href="https://soundcloud.com/the-score-official/under-the-pressure" title="Under The Pressure" target="_blank" style="color: #313131; text-decoration: none;">Under The Pressure</a></div>
             <p id="intro_text_1">Your friendly neighboorhood trans foxgirl</p>
             <p id="intro_text_2">Mostly working on websites and backend software.</p>
 
             <div id="intro_button_holder">
-                <button class="base_button">About me</button>
-                <button class="base_button">Portfolio</button>
-                <button class="base_button">Interests</button>
-                <button class="base_button">Socials</button>
+                <button class="base_button" style="color: hotpink; border-color: hotpink;" onclick="change_div('aboutme')">About me</button>
+                <button class="base_button" style="color: red; border-color: red;" onclick="change_div('portfolio')">Portfolio</button>
+                <button class="base_button" style="color: lightblue;" onclick="change_div('interests')">Interests</button>
+                <button class="base_button" style="color: purple;" onclick="change_div('socials')">Socials</button>
+                <button class="base_button" style="color: orange;" onclick="change_div('big_text')">About me: Big text</button>
             </div>
-        <div>
+        </div>
+        <div id="aboutme" class="center" style="visibility: hidden; opacity: 0;">
+            <div id="section_holder" class="center">
+                <img src="/photos/shemightbeshiro/shiro_happy_alt_casual.png" style="height: 45%">
+                <button id="about_me_home_button" onclick="change_div('intro_div')">Home</button>
+                <p style="color: white; font-family: 'Epilogue', sans-serif; top:50%; position: absolute; font-size: 3vw, max(150%); font-size-adjust: 35%; margin-left: 5px; margin-right: 10px;">
+                    Hello! I am Shiro, but you will probably find me around as PuppyNuff.<br>I am a software engineer, mostly working on the backend, normally is JS, TS,
+                     or Rust.<br>I like writing, designing characters and some more casual video games.</br></br>Here are my <a href="https://en.pronouns.page/@shiro__" style="color: lightblue">pronouns</a>
+                </p>
+            </div>
+        </div>
+
+        <div id="portfolio" class="center" style="visibility: hidden; opacity: 0;">
+            <div id="section_holder" class="center">
+                <img src="/photos/shemightbeshiro/shiro_happy_casual.png" style="height: 45%">
+                <button id="about_me_home_button" onclick="change_div('intro_div')">Home</button>
+                <ul id="portfolio_list">
+                    <li class="list_items"><a style="color: white;" href="./">Ruby (OS-Recreation website, desktop only)</a></li>
+                    <li class="list_items"><a style="color: white;" href="https://github.com/puppynuff/audiocity">AudioCity (Music Player)</a></li>
+                    <li class="list_items"><a style="color: white;" href="https://github.com/puppynuff/Luna">Luna, Suzu, Shiro (Discord bots)</a></li>
+                    <li class="list_items"><a style="color: white;" href="https://github.com/puppynuff/Kamikaze-Shrimp">Kamikaze Shrimp (WIP game engine)</a></li>
+                </ul>
+
+                <p style="position: absolute; top: calc(100% - 50px); color: white; font-size: 10px; width: 100%;">This is just a few that I decided I want to point out. Most of my projects are reworks.</p>
+            </div>
+        </div>
+
+        <div id="interests" class="center" style="visibility: hidden; opacity: 0;">
+            <div id="section_holder" class="center">
+                <img src="/photos/shemightbeshiro/shiro_happy_casual.png" style="height: 45%">
+                <button id="about_me_home_button" onclick="change_div('intro_div')">Home</button>
+                <ul id="portfolio_list">
+                    <li class="list_items">Software Engineering</li>
+                    <li class="list_items">Neural Networks</li>
+                    <li class="list_items">Weapon & Vehicle design</li>
+                    <li class="list_items">Naval Warfare</li>
+                    <li class="list_items">Conspiracy theories</li>
+                </ul>
+
+                <p style="position: absolute; top: calc(100% - 50px); color: white; font-size: 10px; width: 100%;">I've spent too long looking into some of these things.</p>
+            </div>
+        </div>
+
+        <div id="socials" class="center" style="visibility: hidden; opacity: 0;">
+            <div id="section_holder" class="center">
+                <img src="/photos/shemightbeshiro/shiro_happy_casual.png" style="height: 45%">
+                <button id="about_me_home_button" onclick="change_div('intro_div')">Home</button>
+                <ul id="portfolio_list">
+                    <li class="list_items">Discord (@puppynuff_)</li>
+                    <li class="list_items"><a style="font-size: x-large; text-decoration: none; color: red;" href="https://youtube.com/@puppynuff">Youtube</a></li>
+                    <li class="list_items"><a style="font-size: x-large; text-decoration: none; color: gray;" href="https://github.com/puppynuff">Github</a></li>
+                    <li class="list_items"><a style="font-size: x-large; text-decoration: none; color: blue;" href="https://twitter.com/puppynuff">Twitter</a></li>
+                </ul>
+
+                <p style="position: absolute; top: calc(100% - 50px); color: white; font-size: 10px; width: 100%;">I've spent too long looking into some of these things.</p>
+            </div>
+        </div>
+
+        <div id="big_text" style="visibility: hidden; opacity: 0;">
+            <button style="top: 0px; left: 0px;"id="about_me_home_button" onclick="change_div('intro_div')">Home</button>
+            <!-- Biggest element in the code probably -->
+            <pre style="color: white; position:absolute; top: 40px; text-align: left">Hello! I am Shiro, or puppynuff.
+(I guess if my brother or dad find this, well you know now. At least I don't have to do it directly :])
+WHERE I SHINE, NO NEED TO WORRY ABOUT IT LOOKING GOOD.
+This will also have much more information.
+
+I am also ok going by: Luna, Stella, or Raven, although most people stick with shiro (They don't know about the names I was thinking about, and never knew about the last 2 :L)
+And yes, Raven is stolen from my best friend Armored Core VI.
+All I need to say is big mech.
+
+I am ok with all pronouns, but I prefer She/Her, and I try to avoid he/him.
+
+I'm 16 years old currently, and sadly unemployed.
+
+I like doing some random stuff, mostly surrounding the software engineering area, like AI and backend-web-design. I also like writing, drawing (sometimes), and debating (As long as you are willing to listen.)
+For animals, my favorite animal is the artic fox (Just look at it), and my favorite dog breed is huskies or great danes. Cats are cool, but I like how dogs are more affectionate.
+Blahaj.
+I like talking about politics, just to keep myself informed and try to see other peoples point of view.
+I also like singing, but I sing in a monotone voice, and can't really regulate my breath correctly so if you get annoyed, feel free to ask me to stop.
+
+My favorite color is a dark-blue, black, or pink.
+My favorite game is A Hat In Time, or Ultrakill, with beamng or celeste being close runner-ups.
+
+I have a wierd obsession with Naval Warfare, Weapon design, and basic design of computers.
+
+I can't really name things I dislike off my mind that well, but here we go.
+Front end web design, or I guess just UI / UX in general.
+I also don't like loud noises (Makes me feel really bad), crowds, high-pitched or repetative noises, and yelling (I might get loud myself, my mom is half deaf so I got used to it, I dont mean to)
+
+Basic DNI, With some exceptions for jokes.
+
+I'll try to talk to new people, and groups, but I'll probably be quiet most of the time, since I get really uncomfortable.
+
+I get really annoyed when people move my things, since I always lose them afterwards.
+
+Also, at this point I think I need tone-tags, although I'm not so sure. I used to think I was good at telling the differences, until more recently.
+
+I'll probably be quieter when I am talking to new people.
+
+I'm really forgetful on alot of things, like leaving my mic off, and where I place things.
+
+I have two nicknames that people use,
+Shit-o,
+and cheeto.
+
+Apparently my favorite music genre is pop, although I listen to a bunch of places.
+<a href="https://music.youtube.com/playlist?list=PLWQr4Cwzu9NbxQlKLdW4sFL4tUaE8HX71&si=uARw02pKCZPJKOQP">Sad playlist</a>
+<a href="https://music.youtube.com/playlist?list=PLWQr4Cwzu9NbgbtRU1i20ENfds1pwf65y&si=g4zJ4X6z0zWYuy4k">calm playlist</a>
+<a href="https://music.youtube.com/playlist?list=PLWQr4Cwzu9NbIhIMam1gVCfJTnQ9o1kkd&si=m5aa__bqADVQWgbB">Normal playlist</a>
+<a href="https://music.youtube.com/playlist?list=PLWQr4Cwzu9NbYS6LL9VZvO2-1AeJ5axdF&si=aTg7lSzdL_u6Nac5">favorite songs</a>
+</pre>
+        </div>
     </div>
 </body>
 </html>

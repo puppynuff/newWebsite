@@ -1,3 +1,13 @@
+body {
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+h1 {
+    color: green;
+}
+
 html {
     background-color: #262626;
 }
@@ -50,15 +60,65 @@ html {
 
 .base_button {
     border-radius: 3px;
-    background: none; 
-    border: solid; 
-    border-width: 1px; 
-    color: white; 
-    width: 50%; 
+    background: none;
+    border: solid;
+    border-width: 1px;
+    color: white;
+    width: 50%;
     font-size: 20px;
     margin: 2px;
 }
 
 .base_button:hover {
     border-color: gray !important;
+}
+
+#section_holder {
+    min-width: 300px;
+    min-height: 500px;
+    background-color: gray;
+    width: 35%;
+    height:95%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    background: rgb(38,38,38);
+    background: linear-gradient(160deg, rgba(38,38,38,1) 0%, rgba(94,7,85,1) 70%, rgba(255,0,226,1) 100%);
+}
+
+#about_me_home_button {
+    position: absolute;
+    left: 40px;
+    top: 45%;
+    background: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: hotpink;
+    color: hotpink;
+    font-size: 5vw;
+    font-size: max(150%);
+    width: 100px;
+}
+
+#about_me_home_button:hover {
+    border-color: gray;
+}
+
+#portfolio_list {
+    position: absolute;
+    top: 55%;
+    text-align: left;
+    font-size: 4vw, max(larger);
+    font-family: 'Epilogue', sans-serif;
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+.list_items {
+    margin-top: 5%;
+    color: white;
 }
