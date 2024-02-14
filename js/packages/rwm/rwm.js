@@ -48,6 +48,8 @@ applications.rwm = (_command, _args, TERMINAL) => {
         new app_store();
     });
 
+    taskbar.addApplication("about_shiro", "/photos/shemightbeshiro/me_picrew.png", about_taskbar_handler);
+
     // Work on windows next.
     document.addEventListener("mousemove", (ev) => {
         for(let i = 0; i < open_windows.length; i++) {

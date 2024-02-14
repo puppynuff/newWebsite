@@ -8,7 +8,13 @@ const sleep = (ms) => {
 
 async function change_div(new_div) {
     if(changing) return;
-    
+
+    if(new_div == "big_text") {
+        document.body.style.overflow = "scroll";
+    } else {
+        document.body.style.overflow = "hidden";
+    }
+
     changing = true;
     const LAST_DIV = document.getElementById(current_div);
     const NEW_DIV = document.getElementById(new_div);

@@ -9,7 +9,11 @@ let packages = {
     rwm: {
         name: "RWM",
         description: "Ruby Window Manager, makes a desktop environment",
-        files: ["/js/packages/rwm/rwm.js", "/js/packages/rwm/windows/window.js", "/js/packages/rwm/taskbar/taskbar.js", "/js/packages/rwm/applications/app_store/app_store.js"]
+        files: ["/js/packages/rwm/rwm.js", "/js/packages/rwm/windows/window.js",
+            "/js/packages/rwm/taskbar/taskbar.js",
+            "/js/packages/rwm/applications/app_store/app_store.js",
+            "/js/packages/rwm/applications/about/about.js"
+        ]
     },
 
 
