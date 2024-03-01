@@ -15,4 +15,4 @@ The use of the bot is not permitted for users under the age of 13, or under the 
 
 ## Stored Data
 
-If you would like to see the information on data we store check the [User data information](./user_data_information.md), or the [Server data information](V./server_data_information.md)
+If you would like to see the information on data we store check the [User data information](./user_data_information.md), or the [Server data information](/server_data_information)
