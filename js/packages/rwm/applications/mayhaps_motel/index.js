@@ -28,7 +28,7 @@ taskbar.addApplication("Mayhaps Motel: The Dating Sim", "/photos/application_ima
     for(let i = 0; i < scene_locations.length; i++){
         let scene_script = document.createElement("script");
         scene_script.src = scene_locations[i];
-
+    
         document.head.appendChild(scene_script);
     }
 
