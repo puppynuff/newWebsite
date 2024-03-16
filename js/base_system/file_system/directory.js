@@ -10,6 +10,8 @@ class directory {
         this.#paths = {};
         this.#type = "directory";
         this.#name = name;
+
+        active_filesystem[name] = this;
     }
 
     getPreviousDir() {

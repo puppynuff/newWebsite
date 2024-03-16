@@ -6,8 +6,8 @@ applications.clear = (_command, _args, TERMINAL) => {
 
 applications.header = (_command, args, TERMINAL) => {
     if(!args[1]) args = ["", "white"];
-    for(let i = 0; i < openingHeader.length; i++) {
-        new Line(openingHeader[i], args[1], TERMINAL, {
+    for(let i = 0; i < opening_header.length; i++) {
+        new Line(opening_header[i], args[1], TERMINAL, {
             color: args[1],
             margin: "0",
             fontSize: "xx-small"
@@ -65,4 +65,103 @@ applications.whoami = (_command, _args, TERMINAL) => {
 
 function sleep(ms = 0) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+/**
+ *
+ * @param {string} command
+ * @param {Array<string>} _args
+ * @param {Terminal} TERMINAL
+ */
+applications.ls = (_command, _args, TERMINAL) => {
+    for(let [KEY, VALUE] of Object.entries(active_filesystem[TERMINAL.current_path].getPaths())) {
+        if(VALUE.getType() == "directory") KEY += "/";
+        new Line(KEY, "white", TERMINAL).build();
+    }
+}
+
+
+applications.cd = (command, args, TERMINAL) => {
+    let current_path = TERMINAL.current_path;
+
+    if(args[1] == "..") {
+        if(TERMINAL.current_path.split("/").pop() == "") {
+            return TERMINAL.current_path = "/";
+        }
+
+        let split_path = TERMINAL.current_path.split("/");
+        split_path.pop();
+        split_path = split_path.join("/");
+
+        if(split_path == "") {
+            TERMINAL.current_path = "/";
+            return;
+        }
+
+        TERMINAL.current_path = split_path;
+        return;
+    }
+
+    if(args[1].endsWith("/")) args[1] = args[1].slice(0, -1);
+
+    if(current_path != "/") {
+        current_path = current_path + `/${args[1]}`;
+    } else {
+        current_path = current_path + args[1];
+    }
+
+    if(active_filesystem[current_path]) {
+        TERMINAL.current_path = current_path;
+        return;
+    }
+
+    new Line("No such directory", "red", TERMINAL).build();
+    return;
+}
+
+// Allow this to take full directories too.
+applications.cat = (_command, args, TERMINAL) => {
+    const CAT_FILE = active_filesystem[TERMINAL.current_path].getPaths()[args[1]];
+
+    if(!CAT_FILE) return new Line("File does not exist!", "red", TERMINAL).build();
+
+    new Line(CAT_FILE.getContent(), "white", TERMINAL).build();
+}
+
+let in_eval = false;
+let LOG_TERMINAL = undefined;
+
+applications.evalJS = (command, args, TERMINAL) => {
+    in_eval = true;
+    LOG_TERMINAL = TERMINAL;
+    if(command.replace("evalJS ", "").startsWith("\"")) {
+        command = command.replace("evalJS ", "");
+        eval(command.substring(1, command.length - 1));
+
+        in_eval = false;
+        return;
+    }
+
+
+    if(!active_filesystem[TERMINAL.current_path].getPaths()[args[1]]) {
+        in_eval = false;
+        return new Line("No detected js (Make sure its encased with quotes), and no such file.", "red", TERMINAL).build();
+    }
+    eval(active_filesystem[TERMINAL.current_path].getPaths()[args[1]].getContent());
+
+    in_eval = false;
+    return;
+}
+
+let log = console.log;
+
+console.log = (content) => {
+    if(in_eval) {
+        if(!LOG_TERMINAL) return;
+
+        new Line(content.toString(), "white", LOG_TERMINAL).build();
+    } else {
+        log(content);
+    }
 }

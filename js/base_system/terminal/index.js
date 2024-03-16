@@ -1,74 +1,19 @@
 //* Shiro - 12/22/23
 
 //! I'm switching off the class idea, this is going to be one file.
-// TODO Make all of the commands, and warn if the command isn't found. Package Manager will come next.
 
-let openingHeader = `
-██              ▒▒▒▒
-██            ▓▓▓▓▓▓▒▒▒▒                                    ▓▓▓▓▓▓▓▓▓▓▓▓
-██            ██▓▓▓▓▓▓▓▓████                            ████▓▓▓▓▓▓▓▓▓▓██
-██            ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓                        ▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▓▓▒▒
-██            ██▓▓▓▓▒▒██▓▓▓▓▓▓████    ████████      ██▓▓▓▓▓▓▓▓████▒▒██▓▓▓▓
-██            ██▓▓▓▓▒▒▒▒██▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░▓▓▓▓▓▓░░░░▓▓▓▓██▒▒▒▒▒▒██▓▓▓▓
-██            ██▓▓▓▓▒▒▒▒▒▒████░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▒▒▒▒▒▒██▓▓▓▓▓▓
-██            ██▓▓▓▓▒▒▒▒▒▒▓▓██░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓▓▒▒▒▒▒▒██▓▓██░░
-██            ██▓▓▓▓▒▒▒▒▒▒▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▒▒▒▒▒▒██▓▓██
-██            ██▓▓▓▓▓▓▒▒▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▒▒██░░░░██
-██              ██░░████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓░░░░░░██
-██              ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓░░      ▓▓▒▒
-██              ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓          ██  ▒▒
-██                ▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓        ██    ▓▓
-██                ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓        ██    ░░▒▒
-██                ▓▓░░░░░░██████░░░░░░░░░░░░░░░░░░██████░░░░░░░░░░░░▓▓        ██        ▓▓
-██                ██░░░░░░██████░░░░░░░░░░░░░░░░░░██████░░░░░░░░░░░░░░██      ██          ▓▓
-██                ▓▓░░░░░░████  ░░░░░░░░░░░░░░░░░░████  ░░░░░░░░░░░░░░▓▓      ██          ▓▓
-██              ▒▒░░░░░░░░████▓▓░░░░░░░░░░░░░░░░░░████▓▓░░░░░░░░░░░░░░░░▓▓    ██            ▓▓
-██              ▓▓░░░░░░░░████░░░░░░░░░░░░░░░░░░░░██████░░░░░░░░░░░░░░░░██    ██            ██
-██            ▓▓░░░░░░░░░░░░░░        ██▓▓      ░░░░░░░░░░░░░░░░░░░░░░░░██    ██              ██
-██            ▓▓░░░░░░░░░░            ░░░░          ░░░░░░░░░░░░░░░░░░▓▓░░  ▓▓░░              ██
-██              ▓▓░░░░                                        ░░░░░░▓▓██  ▓▓░░                  ▓▓
-██                ▓▓                ██    ██                    ░░██      ██░░░░                ██
-██                ░░▒▒              ░░▓▓▒▒░░                  ▓▓▓▓░░    ▓▓▒▒░░░░                ██
-██                    ▓▓                                  ▓▓▓▓        ▓▓░░░░░░░░░░░░    ░░  ░░░░██
-██                      ▒▒▓▓                        ▓▓▓▓▓▓████▓▓▓▓    ██░░░░░░░░░░░░░░░░░░░░░░░░██
-██                          ██████              ░░░░░░░░░░░░░░░░░░██████░░░░░░░░░░░░░░░░░░░░░░░░██
-██                            ░░██            ░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓░░░░░░░░░░░░░░░░░░░░░░██
-██                              ██            ░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░░░░░░░░░░░░░▒▒██
-██                              ██            ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░░░░░░░░░░░▓▓
-██                              ██░░          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░░░░░░░░░▓▓
-██                              ██░░            ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓░░░░░░░░░░░░▓▓
-██                              ██░░              ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓░░░░░░░░▓▓
-██                              ▓▓░░░░            ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░▓▓▒▒░░
-██                              ▓▓░░░░░░          ░░░░░░░░░░░░░░      ░░░░░░░░░░▓▓▓▓▓▓
-██                            ██░░░░░░░░          ░░░░░░░░░░░░▓▓        ░░░░░░░░▓▓
-██                            ▓▓░░░░░░░░░░██      ░░░░░░░░░░░░▓▓      ░░░░░░░░░░▓▓
-██                            ▓▓░░▓▓▓▓░░░░░░██████░░░░░░▓▓░░░░████████░░░░░░░░░░▓▓
-██                            ▓▓▒▒▓▓▓▓▒▒░░▓▓    ██▒▒░░▓▓▓▓▒▒░░▓▓░░░░██░░▒▒▒▒▒▒░░▓▓
-██                          ▓▓▓▓▓▓▓▓▓▓▓▓▓▓██      ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▓▓▓▓▓▓▓▓██
-██                          ██▓▓▓▓▓▓▓▓▓▓▓▓        ▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▓▓██▓▓▓▓▓▓▓▓▓▓██
-██                          ██▓▓▓▓▓▓▓▓▓▓▓▓        ██▓▓▓▓▓▓▓▓▓▓██▓▓▓▓██▓▓▓▓▓▓▓▓▓▓░░
-██                          ██▓▓▓▓▓▓▓▓▓▓▓▓        ██▓▓▓▓▓▓▓▓▓▓████  ██▓▓▓▓▓▓▓▓██
-██                            ██████████            ██████████        ████████
-██                                    ░░                    ░░              ░░
-██
-██
-██
-Run "help" for help.
-To access the desktop environment type "setup desktop"
-MAYHAPS MOTEL RELEASING 2/9/24
-`.split("\n");
-
-
+let opening_header = [];
 class Terminal {
     /**
-    * @param {HTMLElement} motherElement
+    * @param {HTMLElement} mother_element
     */
-    constructor(motherElement) {
+    constructor(mother_element, current_path) {
         let location_marker = document.createElement("div");
         location_marker.id = "locationMarker";
-        motherElement.appendChild(location_marker)
-        this.motherElement = motherElement;
+        mother_element.appendChild(location_marker)
+        this.mother_element = mother_element;
         this.lines = [];
+        this.current_path = current_path;
         this.locationMarker = location_marker;
     }
 
@@ -95,24 +40,24 @@ class Line {
      * @param {Terminal} terminal
      * @param {object} customCss
     */
-    constructor(text, color, terminal, customCSS) {
+    constructor(text, color, terminal, custom_css) {
         this.text = text;
         this.color = color;
-        this.motherElement = terminal.motherElement;
+        this.mother_element = terminal.mother_element;
         this.terminal = terminal;
         this.editable = true;
-        this.customCSS = customCSS;
+        this.custom_css = custom_css;
     }
 
     build() {
         let element = document.createElement("pre");
         element.textContent = this.text;
-        if(this.customCSS) element = setStyles(element, this.customCSS);
+        if(this.custom_css) element = setStyles(element, this.custom_css);
         else {
             element.style.color = this.color;
             element.style.margin = "0";
         }
-        this.motherElement.appendChild(element);
+        this.mother_element.appendChild(element);
         this.element = element;
         this.terminal.addLine(this);
     }
@@ -142,7 +87,7 @@ class Line {
  */
 function handleInput(CURSOR, TERMINAL) {
     if(TERMINAL.stopped == true) return;
-    let typing_line = new Line(CURSOR, "white", TERMINAL);
+    let typing_line = new Line(`${TERMINAL.current_path}~ ${CURSOR}`, "white", TERMINAL);
     typing_line.current_text = "";
 
     typing_line.build();
@@ -150,25 +95,24 @@ function handleInput(CURSOR, TERMINAL) {
     document.addEventListener("keydown",  (key) => inputEvent(key, typing_line, CURSOR, TERMINAL));
 }
 
-function setup() {
+async function setup() {
     let cursor = "-";
 
-    const TERMINAL = new Terminal(document.body);
+    opening_header = (await ((await fetch("./js/base_system/terminal/header.txt")).text())).split("\n");
+
+    const TERMINAL = new Terminal(document.body, "/");
 
     (applications.header)("",["", "white"],TERMINAL);
 
     new Line("Terminal doesn't autoscroll. Sorry!", "yellow", TERMINAL).build();
     new Line("Hello, welcome to RubyOS!", "white", TERMINAL).build();
-
     handleInput(cursor, TERMINAL);
 }
 
 // This will hold the applications, to make it easier to run.
 // What it will be given is the full string, the parsed arguments, and the terminal used.
 // Its a dictionary so if users add something, they can just add it to the code.
-let applications = {
-
-}
+let applications = {}
 
 /**
  * @param {string} command
@@ -201,17 +145,17 @@ function setStyles(element, styles) {
 
 function inputEvent(key, typing_line, CURSOR, TERMINAL) {
     switch(key.key) {
-        case "Backspace": return backspaceEvent(key, typing_line, CURSOR);
+        case "Backspace": return backspaceEvent(key, typing_line, CURSOR, TERMINAL);
         case "Enter" : return enterEvent(key, typing_line, CURSOR, TERMINAL);
-        default: return defaultEvent(key, typing_line, CURSOR);
+        default: return defaultEvent(key, typing_line, CURSOR, TERMINAL);
     }
 }
 
-function backspaceEvent(key, typing_line, CURSOR) {
+function backspaceEvent(key, typing_line, CURSOR, TERMINAL) {
     if(key.ctrlKey) typing_line.current_text = "";
 
     typing_line.current_text = typing_line.current_text.slice(0, -1);
-    typing_line.modifyText(typing_line.current_text + CURSOR);
+    typing_line.modifyText(`${TERMINAL.current_path}~ ${typing_line.current_text}${CURSOR}`);
     return typing_line.current_text;
 }
 
@@ -221,10 +165,10 @@ function enterEvent(_key, typing_line, CURSOR, TERMINAL) {
     return runCommand(typing_line.current_text, CURSOR, TERMINAL);
 }
 
-function defaultEvent(key, typing_line, CURSOR) {
+function defaultEvent(key, typing_line, CURSOR, TERMINAL) {
     if(key.key.length > 1) return;
 
     typing_line.current_text += key.key;
-    typing_line.modifyText(typing_line.current_text + CURSOR);
+    typing_line.modifyText(`${TERMINAL.current_path}~ ${typing_line.current_text}${CURSOR}`);
     return typing_line.current_text;
 }

@@ -2,12 +2,15 @@ class RubyFile {
     #content;
     #locked;
     #name;
+    #type;
 
     constructor(name, locked, content) {
         this.#content = content;
 
         // This basically means if this needs elevated perms to access.
         this.#locked = locked;
+
+        this.#type = "file";
 
         this.#name = name;
     }
@@ -22,6 +25,10 @@ class RubyFile {
         this.#name = name;
 
         return true;
+    }
+
+    getType() {
+        return this.#type;
     }
 
     getContent() {
