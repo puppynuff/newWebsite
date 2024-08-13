@@ -268,3 +268,9 @@ html, body {
         display: none;
     }
 }
+
+@media (pointer:none), (pointer:coarse) {
+    #ruby_holder_div {
+        display: none;
+    }
+}
