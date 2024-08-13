@@ -1,4 +1,4 @@
-1. Window Manager
-2. Command Line for Window Manager
-3. File System
-4. More packages.
+Fix missing portfolio fields (about me, more projects ive worked on, interests)
+Command Line for Window Manager
+File System
+More packages.

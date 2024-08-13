@@ -1,0 +1,23 @@
+html, body {
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
+    padding : 0;
+    margin: 0;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+svg {
+    fill: #D7289D
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+p {
+    font-family: monospace;
+    font-size: large;
+}

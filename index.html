@@ -1,23 +1,53 @@
+<!-- Make this the landing page. Give the option to access the main website after that.
+This website is supposed to be a portfolio.
+Making people go way out of their way to access it will be annoying.-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet">
+    <link href="./css/index.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruby</title>
-    <meta name="description" content="Shiro's prortfolio website! Designed to replicate the linux operating system.">
-    <link rel="stylesheet" href="./css/index.css">
-
-    <link href="https://fonts.cdnfonts.com/css/public-pixel" rel="stylesheet">
-
-    <!-- Add in the filesystem information first -->
-    <script src="./js/base_system/file_system/file.js"></script>
-    <script src="./js/base_system/file_system/directory.js"></script>
-
-    <script src="./js/base_system/terminal/index.js" defer></script>
-    <script src="./js/base_system/terminal/commands.js" defer></script>
-    <script src="./js/base_system/package_manager/rpm.js" defer></script>
+    <title>Stella</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" defer></script>
     <script src="./js/index.js" defer></script>
 </head>
 <body>
+    <div id="starting-div" class="unloaded fadeIn">
+        <div id="holder_div">
+            <img id="avatar" class="center-width" alt="Stella's profile picture"></img>
+            <h1 class="text header">Stella</h1>
+            <h3 class="text header"><a style="color: rgb(255, 0, 255);">Backend</a> Developer</h3>
+            <p class="text" id="yap_text">Independant software engineer, working on websites, and general applications.<br>I mostly program in Rust, Typescript, and Javascript</p>
+            <p class="text">puppynuff@gmail.com
+                <br/>discord: puppy681nuff</p>
+            <div id="socials" class="center-width">
+                <a href="https://twitter.com/puppynuff" style="color: white; text-decoration: none; font-family: 'Montserrat'; font-weight: bolder;"><img src="./photos/twitter.png" height="30px"></a>
+                <a href="https://github.com/puppynuff" style="color: white; text-decoration: none; font-family: 'Montserrat'; font-weight: bolder;"><img src="./photos/github.png" height="30px"></a>
+                <!-- <a href="mailto:puppynuff@gmail.com" style="color: white"><img src="./photos/mail.png" style="filter: invert(1);" title="puppynuff@gmail.com" height="30px"></a> -->
+            </div>
+            <p style="color: white; position: absolute; bottom: 0%; text-align: center; width: 100%; font-size: 3vh;" class="hide">↓</p>
+        </div>
+    </div>
+    <div id="ruby_holder_div">
+        <div id="ruby_div" onclick="ruby_clicked()">
+            <h1 class="ruby_text">Ruby</h1>
+            <p class="ruby_text">A web recreation of linux
+                <br>Primary part of this website.
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br><br><br><br><a style="font-size: smaller; color: gray;">This div is a button :]</a>
+            </p>
+        </div>
+    </div>
 </body>
 </html>

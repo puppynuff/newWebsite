@@ -1,6 +1,6 @@
 html, body {
     background-color: black;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     padding : 0;
     margin: 0;
@@ -9,15 +9,262 @@ html, body {
     scrollbar-width: none;
 }
 
-svg {
-    fill: #D7289D
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
-body::-webkit-scrollbar {
+.text {
+    text-align: center;
+    margin: 0;
+    color: white;
+    font-size: 2vh;
+    font-weight: 400;
+}
+
+.center-width {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.fadeIn {
+    animation:fadeIn 0.5s linear;
+}
+
+.header {
+    font-family: 'Playwrite AU VIC';
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(1%);
+    }
+
+    to{
+        opacity: 1;
+    }
+}
+
+.unloaded {
+    animation:fadeIn 0.5s linear;
+    animation-fill-mode: forwards;
+    background-position: bottom 0% right 0%;
+    background-blend-mode: darken;
+    background-color: rgb(110, 110, 110);
+    height: 100vh;
+    /* width: 100vw; */
+    background-size: cover;
+    background-image: url(../photos/DIO.jpg);
+}
+
+.loaded {
+    animation:starting-div-big 1s linear;
+    animation-fill-mode: forwards;
+    background-position: bottom 0% right 0%;
+    height: 100vh;
+    /* width: 100vw; */
+    background-size: cover;
+    background-image: url(../photos/jotaro_mobile_image.jpg);
+}
+
+#starting-div {
+    overflow-y: hidden;
+}
+
+@keyframes starting-div-small {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+        /* background-image: url(../photos/jotaro_mobile_image.jpg); */
+        /* background-repeat: no-repeat; */
+    }
+
+    100% {
+        opacity: 1;
+        background-image: url(../photos/jotaro_mobile_image.jpg)
+    }
+}
+
+@keyframes starting-div-big {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        background-image: url(../photos/DIO.jpg);
+        background-position: bottom 0% right 0%;
+        background-size: cover;
+        background-blend-mode: darken;
+        background-color: rgb(110, 110, 110);
+    }
+}
+
+#avatar {
+    border-radius: 50%; 
+    height: 20vh;
+}
+
+#holder_div {
+    transform: translateY(5%);
+    overflow-y: auto;
+    height: 95%;
+}
+
+.playwrite-au-vic-widujoahui {
+    font-family: "Playwrite AU VIC", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#yap_text {
+    font-size: 2vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#about-me-header {
+    font-size: 5vh;
+    padding-top: 70vh;
+    color: rgb(255, 238, 0);
+}
+
+*::-webkit-scrollbar {
     display: none;
 }
 
-p {
-    font-family: monospace;
+* {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vw;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.montserrat-font {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#ruby_div {
+    background-image: url(../photos/Ruby.png);
+    height: 50vh;
+    background-position-y: top;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: ruby_div_unhover .5s;
+    animation-fill-mode: forwards;
+    position: relative;
+    left: 2.5%;
+    width: 95%;
+}
+
+#ruby_div:hover {
+    animation: ruby_div_hover .5s;
+    animation-fill-mode: forwards;
+}
+
+#ruby_holder_div {
+    height: 50vh;
+    /* background-color: rgb(29, 29, 29);1 */
+}
+
+.ruby_text {
+    color:rgb(255, 255, 255);
+    /* mix-blend-mode: difference; */
+    text-align: center;
+    position: relative;
     font-size: large;
+    width: calc(100vw - 40%);
+    left: 35%;
+}
+
+
+@keyframes ruby_div_hover {
+    from {
+        zoom: 80%;
+        left:2.5%;
+        background-color: black;
+        width: 95%;
+    }
+    to {
+        zoom: 100%;
+        left: 1.25%;
+        width: 97.5%;
+        background-color: rgb(19, 19, 19);
+    }
+}
+
+@keyframes ruby_div_unhover {
+    from {
+        zoom: 100%;
+        left: 1.25%;
+        background-color: rgb(19, 19, 19);
+        width: 97.5%;
+    }
+    to {
+        zoom: 80%;
+        left:2.5%;
+        width: 95%;
+        background-color: black;
+    }
+}
+
+
+@keyframes hide_ruby_div {
+    from {
+        height: 50vh;
+    }
+    to {
+        height: 0;
+        font-size: 0;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #starting-div {
+        background-image: url(../photos/DIO.jpg);
+        animation:starting-div-small 1s linear;
+        animation-fill-mode: forwards;
+        height: 100vh;
+    }
+
+    #ruby_holder_div {
+        animation:hide_ruby_div 1s linear;
+        animation-fill-mode: forwards;
+    }
+    #ruby_div {
+        animation:hide_ruby_div 1s linear;
+        animation-fill-mode: forwards;
+    }
+    .ruby_text {
+        animation:hide_ruby_div 1s linear;
+        animation-fill-mode: forwards;
+    }
+
+
+    .hide {
+        display: none;
+    }
 }
