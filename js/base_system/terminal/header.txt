@@ -49,4 +49,4 @@
 ██
 Run "help" for help.
 To access the desktop environment type "setup desktop"
-MAYHAPS MOTEL RELEASING 2/9/24
+Now supporting PS5 controller input!

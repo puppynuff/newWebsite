@@ -13,14 +13,24 @@ class app_store {
             icon_url: "/photos/application_images/app_store.svg"
         });
 
-        this.application_list.push({
-            name: "Mayhaps Motel, The Dating Sim",
-            description: "The official Mayhaps Motel Dating Sim! (2/14/24!)",
-            icon_url: "/photos/application_images/mayhaps.webp",
+        this.application_list.push(
+            /* {
+             This was cancelled.
+             name: "Mayhaps Motel, The Dating Sim",
+             description: "The official Mayhaps Motel Dating Sim! (2/14/24!)",
+             icon_url: "/photos/application_images/mayhaps.webp",
+             name_location: "210px",
+             files: ["/js/packages/rwm/applications/mayhaps_motel/index.js"]
+        }*/
+       
+        {
+            name: "Controller Tester",
+            description: "This is made for my next game attempt",
+            icon_url: "/photos/application_images/controller.svg",
             name_location: "210px",
-            files: ["/js/packages/rwm/applications/mayhaps_motel/index.js"]
-        })
-
+            files: ["/js/packages/rwm/applications/controller_testing/controller_testing.js"]
+        });
+        
         this.renderWindow();
     }
 
@@ -31,7 +41,7 @@ class app_store {
         window_holder.style.top = "50px";
         window_holder.style.position = "absolute";
 
-         const holder = document.getElementById("AppStore_holder_div");
+        const holder = document.getElementById("AppStore_holder_div");
 
         window_holder.style.display = "flex";
         window_holder.style.flexDirection = "column";

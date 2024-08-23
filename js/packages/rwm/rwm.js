@@ -4,6 +4,7 @@ let open_windows = [];
 
 // At some point I need to make a desktop environment file thing.
 // But for now this will work.
+const TASKBAR = new Taskbar();
 applications.rwm = (_command, _args, TERMINAL) => {
     TERMINAL.stop();
 
@@ -38,17 +39,15 @@ applications.rwm = (_command, _args, TERMINAL) => {
 
     BACKGROUND_DIV.appendChild(task_bar_div);
 
-    taskbar = new Taskbar();
-
     window.onresize = (_ev) => {task_bar_div.style.top = `${window.innerHeight - 50}px`};
 
-    taskbar.addApplication("app_store", "/photos/application_images/app_store.svg", () => {
+    TASKBAR.addApplication("app_store", "/photos/application_images/app_store.svg", () => {
         if(document.getElementById("AppStore_border_div")) return document.getElementById("AppStore_border_div").hidden = !document.getElementById("AppStore_border_div").hidden;
 
         new app_store();
     });
 
-    taskbar.addApplication("about_shiro", "/photos/shemightbeshiro/me_picrew.png", about_taskbar_handler);
+    TASKBAR.addApplication("about_shiro", "/photos/shemightbeshiro/me_picrew.png", about_taskbar_handler);
 
     // Work on windows next.
     document.addEventListener("mousemove", (ev) => {
