@@ -2,7 +2,7 @@ let current_div = "intro_div";
 let changing = false;
 
 
-const sleep = (ms) => {
+function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 

@@ -12,6 +12,8 @@ class RWM_Window {
         height = 800,
         min_width = 400,
         min_height = 400,
+        max_width = undefined,
+        max_height = undefined,
         top_color = "#181818",
         icon_url = "/photos/no_icon.png"
     }) {
@@ -24,6 +26,9 @@ class RWM_Window {
 
         this.min_width = min_width;
         this.min_height = min_height;
+
+        this.max_height = max_height;
+        this.max_width = max_width;
 
         this.array_pos = open_windows.length;
         this.createWindow();
@@ -382,6 +387,8 @@ class RWM_Window {
 
         if(this.height < this.min_height) this.height = this.min_height;
         if(this.width < this.min_width) this.width = this.min_width;
+        if(this.max_height && this.height > this.max_height) this.height = this.max_height;
+        if(this.max_width && this.width > this.max_width) this.width = this.max_width;
 
         BORDER_DIV.style.width = `${this.width}px`;
         BORDER_DIV.style.height = `${this.height}px`;

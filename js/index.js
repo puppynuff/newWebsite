@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const hashed_email = CryptoJS.SHA256('puppynuff@gmail.com'.toLowerCase());
-    const gravatar_url = `https://www.gravatar.com/avatar/${hashed_email}?size=1920`;
+    const HASHED_EMAIL = CryptoJS.SHA256('puppynuff@gmail.com'.toLowerCase());
+    const GRAVATAR_URL = `https://www.gravatar.com/avatar/${HASHED_EMAIL}?size=1920`;
 
-    document.getElementById('avatar').src = gravatar_url;
+    document.getElementById('avatar').src = GRAVATAR_URL;
 })
 
 let loaded = false;

@@ -9,8 +9,9 @@ let packages = {
     rwm: {
         name: "RWM",
         description: "Ruby Window Manager, makes a desktop environment",
-        files: ["/js/packages/rwm/rwm.js", "/js/packages/rwm/windows/window.js",
-            "/js/packages/rwm/taskbar/taskbar.js",
+        files: [ "/js/packages/rwm/taskbar/taskbar.js",
+            "/js/packages/rwm/rwm.js", 
+            "/js/packages/rwm/windows/window.js",
             "/js/packages/rwm/applications/app_store/app_store.js",
             "/js/packages/rwm/applications/about/about.js"
         ]
@@ -52,9 +53,9 @@ function installPackages(args, TERMINAL) {
         textObject.build();
 
         for(let j = 0; j < packages[args[i]].files.length; j++) {
-            const newScript = document.createElement("script");
-            newScript.src = packages[args[i]].files[j];
-            document.head.appendChild(newScript);
+            const NEW_SCRIPT = document.createElement("script");
+            NEW_SCRIPT.src = packages[args[i]].files[j];
+            document.head.appendChild(NEW_SCRIPT);
 
             textObject.modifyText(`Installing: ${Math.round(100 * ((j + 1)/packages[args[i]].files.length))}%`);
         }

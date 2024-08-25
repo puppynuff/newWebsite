@@ -12,6 +12,7 @@ async function setupDirectories() {
 
     // Load the file system, into the file system?
     const FILE_SYSTEM_DIR = new directory(true, "/RU32/base_system/file_system");
+
     FILE_SYSTEM_DIR.addPath("file.js", new RubyFile("file.js", true, await getFileContent("./js/base_system/file_system/file.js")));
     FILE_SYSTEM_DIR.addPath("directory.js", new RubyFile("directory.js", true, await getFileContent("./js/base_system/file_system/directory.js")));
 

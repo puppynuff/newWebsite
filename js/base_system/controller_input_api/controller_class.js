@@ -7,8 +7,6 @@
 // Buttons go 1 through 14
 class Controller {
     constructor(controller_id, controller_index) {
-        console.log(controller_index);
-
         // This might be useful for detecting controller type???
         this.controller_id = controller_id;
 
@@ -75,7 +73,7 @@ class Controller {
     }
 
     controller_input(gamepad) {
-        const buttons = gamepad.buttons;
+        const BUTTONS = gamepad.buttons;
 
         if (this.controller_type == "PS5") {
             // The wierd thing about the ps5 is that for some god forsaken reason they dicided
@@ -83,20 +81,20 @@ class Controller {
             // bind. all. four. of. them. into. one. axis.
             // So now we have abritary numbers we have to use to check if those are pushed down.
             // Thank you Sony.
-            this.button1_pressed = buttons[1]; // X
-            this.button2_pressed = buttons[2]; // O
-            this.button3_pressed = buttons[3]; // Triangle
-            this.button4_pressed = buttons[0]; // Square
-            this.left_bumper_pressed = buttons[4].pressed;
-            this.right_bumper_pressed = buttons[5].pressed;
-            this.left_trigger_pressed = buttons[6].pressed;
-            this.right_trigger_pressed = buttons[7].pressed;
-            this.select_pressed = buttons[8].pressed;
-            this.start_pressed = buttons[9].pressed;
-            this.left_stick_pressed = buttons[10].pressed;
-            this.right_stick_pressed = buttons[11].pressed;
-            this.logo_button_pressed = buttons[12].pressed;
-            this.center_pressed = buttons[13].pressed;
+            this.button1_pressed = BUTTONS[1].pressed; // X
+            this.button2_pressed = BUTTONS[2].pressed; // O
+            this.button3_pressed = BUTTONS[3].pressed; // Triangle
+            this.button4_pressed = BUTTONS[0].pressed; // Square
+            this.left_bumper_pressed = BUTTONS[4].pressed;
+            this.right_bumper_pressed = BUTTONS[5].pressed;
+            this.left_trigger_pressed = BUTTONS[6].pressed;
+            this.right_trigger_pressed = BUTTONS[7].pressed;
+            this.select_pressed = BUTTONS[8].pressed;
+            this.start_pressed = BUTTONS[9].pressed;
+            this.left_stick_pressed = BUTTONS[10].pressed;
+            this.right_stick_pressed = BUTTONS[11].pressed;
+            this.logo_button_pressed = BUTTONS[12].pressed;
+            this.center_pressed = BUTTONS[13].pressed;
 
 
             // Axis 
@@ -112,7 +110,7 @@ class Controller {
 
             switch (gamepad.axes[9]) {
                 case up_dpad: {
-                    this.up_pressed = false;
+                    this.up_pressed = true;
                     this.right_pressed = false;
                     this.left_pressed = false;
                     this.down_pressed = false;

@@ -29,17 +29,17 @@ applications.rwm = (_command, _args, TERMINAL) => {
     document.body.innerHTML = "";
     document.body.appendChild(BACKGROUND_DIV);
 
-    const task_bar_div = document.createElement("div");
-    task_bar_div.style.backgroundColor = "rgba(100, 100, 100, 0.2)";
-    task_bar_div.style.height = "50px";
-    task_bar_div.style.width = "100%";
-    task_bar_div.style.position = "fixed";
-    task_bar_div.style.top = `${window.innerHeight - 50}px`;
-    task_bar_div.id = "rwm_task_bar";
+    const TASK_BAR_DIV = document.createElement("div");
+    TASK_BAR_DIV.style.backgroundColor = "rgba(100, 100, 100, 0.2)";
+    TASK_BAR_DIV.style.height = "50px";
+    TASK_BAR_DIV.style.width = "100%";
+    TASK_BAR_DIV.style.position = "fixed";
+    TASK_BAR_DIV.style.top = `${window.innerHeight - 50}px`;
+    TASK_BAR_DIV.id = "rwm_task_bar";
 
-    BACKGROUND_DIV.appendChild(task_bar_div);
+    BACKGROUND_DIV.appendChild(TASK_BAR_DIV);
 
-    window.onresize = (_ev) => {task_bar_div.style.top = `${window.innerHeight - 50}px`};
+    window.onresize = (_ev) => {TASK_BAR_DIV.style.top = `${window.innerHeight - 50}px`};
 
     TASKBAR.addApplication("app_store", "/photos/application_images/app_store.svg", () => {
         if(document.getElementById("AppStore_border_div")) return document.getElementById("AppStore_border_div").hidden = !document.getElementById("AppStore_border_div").hidden;

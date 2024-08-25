@@ -1,10 +1,10 @@
 function about_taskbar_handler() {
-    const about_application_border = document.getElementById("AboutShiro_border_div");
+    const ABOUT_APPLICATION_BORDER = document.getElementById("AboutShiro_border_div");
 
-    if(about_application_border != undefined) {
-        about_application_border.hidden = !about_application_border.hidden;
+    if(ABOUT_APPLICATION_BORDER != undefined) {
+        ABOUT_APPLICATION_BORDER.hidden = !ABOUT_APPLICATION_BORDER.hidden;
     }
-    const _about_window = new RWM_Window("About Shiro", {
+    const _ABOUT_WINDOW = new RWM_Window("About Shiro", {
         width: 800,
         height: 800,
         min_width: 400,
@@ -14,13 +14,13 @@ function about_taskbar_handler() {
     });
 
 
-    const application_border = document.getElementById("AboutShiro_holder_div");
+    const APPLICATION_BORDER = document.getElementById("AboutShiro_holder_div");
 
-    const iframe = document.createElement("iframe");
+    const IFRAME = document.createElement("iframe");
 
-    iframe.src = "/shemightbeshiro.html";
-    iframe.height = "100%";
-    iframe.width = "100%";
+    IFRAME.src = "/shemightbeshiro.html";
+    IFRAME.height = "100%";
+    IFRAME.width = "100%";
 
-    application_border.appendChild(iframe);
+    APPLICATION_BORDER.appendChild(IFRAME);
 }

@@ -4,7 +4,7 @@ class app_store {
     constructor() {
         this.application_list = [];
 
-        const _app_store_window = new RWM_Window("App Store", {
+        const _APP_STORE_WINDOW = new RWM_Window("App Store", {
             width: 800,
             height: 800,
             min_width: 400,
@@ -35,47 +35,47 @@ class app_store {
     }
 
     renderWindow() {
-        const window_holder = document.createElement("div");
-        window_holder.style.width = "100%";
-        window_holder.style.height = "95%";
-        window_holder.style.top = "50px";
-        window_holder.style.position = "absolute";
+        const WINDOW_HOLDER = document.createElement("div");
+        WINDOW_HOLDER.style.width = "100%";
+        WINDOW_HOLDER.style.height = "95%";
+        WINDOW_HOLDER.style.top = "50px";
+        WINDOW_HOLDER.style.position = "absolute";
 
-        const holder = document.getElementById("AppStore_holder_div");
+        const HOLDER = document.getElementById("AppStore_holder_div");
 
-        window_holder.style.display = "flex";
-        window_holder.style.flexDirection = "column";
-        window_holder.style.flexWrap = "wrap";
-        window_holder.style.overflowY = "scroll";
-        window_holder.style.gap = "20px";
-        window_holder.style.alignItems = "center";
+        WINDOW_HOLDER.style.display = "flex";
+        WINDOW_HOLDER.style.flexDirection = "column";
+        WINDOW_HOLDER.style.flexWrap = "wrap";
+        WINDOW_HOLDER.style.overflowY = "scroll";
+        WINDOW_HOLDER.style.gap = "20px";
+        WINDOW_HOLDER.style.alignItems = "center";
 
 
 
         for(let i = 0; i < this.application_list.length; i++) {
-            window_holder.appendChild(application_generator(this.application_list[i].name, this.application_list[i].description, this.application_list[i].icon_url, this.application_list[i].name_location, this.application_list[i].files));
+            WINDOW_HOLDER.appendChild(application_generator(this.application_list[i].name, this.application_list[i].description, this.application_list[i].icon_url, this.application_list[i].name_location, this.application_list[i].files));
         }
 
-        holder.style.overflowX = "hidden";
-        holder.style.overflowY = "hidden";
-        window_holder.style.overflowX = "hidden";
+        HOLDER.style.overflowX = "hidden";
+        HOLDER.style.overflowY = "hidden";
+        WINDOW_HOLDER.style.overflowX = "hidden";
 
-        holder.appendChild(window_holder);
+        HOLDER.appendChild(WINDOW_HOLDER);
     }
 }
 
 
 function application_generator(name, description, icon, text_pos, files) {
-    const border = document.createElement("div");
-    border.style.width = "500px";
-    border.style.height = "230px";
-    border.style.backgroundColor = "white";
-    border.style.borderRadius = "5px";
+    const BORDER = document.createElement("div");
+    BORDER.style.width = "500px";
+    BORDER.style.height = "230px";
+    BORDER.style.backgroundColor = "white";
+    BORDER.style.borderRadius = "5px";
 
     let image_element = document.createElement("img");
     image_element.src = icon;
 
-    border.appendChild(image_element);
+    BORDER.appendChild(image_element);
     image_element.width = 200;
     image_element.height = 230;
     image_element.style.borderTopLeftRadius = "5px";
@@ -111,9 +111,9 @@ function application_generator(name, description, icon, text_pos, files) {
         download_button.textContent = `Downloading 0%`;
 
         for(let i = 0; i < files.length; i++) {
-            const script = document.createElement("script");
-            script.src = files[i];
-            document.head.appendChild(script);
+            const SCRIPT = document.createElement("script");
+            SCRIPT.src = files[i];
+            document.head.appendChild(SCRIPT);
         }
 
         downloaded_apps.push(name);
@@ -124,9 +124,9 @@ function application_generator(name, description, icon, text_pos, files) {
     download_button.style.borderRadius = "0px";
     download_button.style.background = "none";
 
-    border.appendChild(name_element);
-    border.appendChild(description_element);
-    border.appendChild(download_button)
+    BORDER.appendChild(name_element);
+    BORDER.appendChild(description_element);
+    BORDER.appendChild(download_button)
 
-    return border;
+    return BORDER;
 }
