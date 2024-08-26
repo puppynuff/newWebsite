@@ -136,7 +136,7 @@ function runCommand(command, CURSOR, TERMINAL) {
 }
 
 function setStyles(element, styles) {
-    for(var s in styles) {
+    for(let s in styles) {
         element.style[s] = styles[s];
     }
 

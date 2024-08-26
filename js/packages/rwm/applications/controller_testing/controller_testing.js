@@ -72,45 +72,50 @@ class controller_testing {
         }
 
         UNSUPPORTED_CONTROLLER_WARNING.hidden = true;
-        PS5_CONTROLLER_SVG.style.opacity = "100%";
-        PS5_CONTROLLER_SVG.hidden = false;
-
+        
+        switch(CONTROLLER.controller_type) {
+            case "PS5": {
+                PS5_CONTROLLER_SVG.style.opacity = "100%";
+                PS5_CONTROLLER_SVG.hidden = false;
+            }
+        }
+        
         // Now just to check if the buttons are pushed down
         // Yaaay
         const BUTTON_MAPPING = {
-            button1_pressed: "x_button_ps5",
-            button2_pressed: "o_button_ps5",
-            button3_pressed: "triangle_button_ps5",
-            button4_pressed: "square_button_ps5",
-            left_bumper_pressed: "left_bumper_ps5",
-            right_bumper_pressed: "right_bumper_ps5",
-            left_pressed: "dpad_left_ps5",
-            right_pressed: "dpad_right_ps5",
-            up_pressed: "dpad_up_ps5",
-            down_pressed: "dpad_down_ps5",
-            center_pressed: "touchpad_ps5",
-            left_stick_pressed: "left_stick_ps5",
-            right_stick_pressed: "right_stick_ps5",
-            start_pressed: "pause_button_ps5",
-            select_pressed: "share_button_ps5",
+            button1_pressed: "button1",
+            button2_pressed: "button2",
+            button3_pressed: "button3",
+            button4_pressed: "button4",
+            left_bumper_pressed: "left_bumper",
+            right_bumper_pressed: "right_bumper",
+            left_pressed: "dpad_left",
+            right_pressed: "dpad_right",
+            up_pressed: "dpad_up",
+            down_pressed: "dpad_down",
+            center_pressed: "touchpad",
+            left_stick_pressed: "left_stick",
+            right_stick_pressed: "right_stick",
+            start_pressed: "pause_button",
+            select_pressed: "share_button",
             logo_button_pressed: "home_button"
         };
-        
+
         for (let button in BUTTON_MAPPING) {
             document.getElementById(BUTTON_MAPPING[button]).style.fill = CONTROLLER[button] ? "red" : "white";
         }
-        
+
         const LEFT_TRIGGER_COLORS = get_color_from_number(0, 255, 255, (CONTROLLER.left_trigger_axis + 1) / 2);
-        document.getElementById("left_trigger_ps5").style.fill = `rgb(${255 - LEFT_TRIGGER_COLORS[0]}, ${255 - LEFT_TRIGGER_COLORS[1]}, ${255 - LEFT_TRIGGER_COLORS[2]})`;
+        document.getElementById("left_trigger").style.fill = `rgb(${255 - LEFT_TRIGGER_COLORS[0]}, ${255 - LEFT_TRIGGER_COLORS[1]}, ${255 - LEFT_TRIGGER_COLORS[2]})`;
 
         const RIGHT_TRIGGER_COLORS = get_color_from_number(0, 255, 255, (CONTROLLER.right_trigger_axis + 1) / 2);
-        document.getElementById("right_trigger_ps5").style.fill = `rgb(${255 - RIGHT_TRIGGER_COLORS[0]}, ${255 - RIGHT_TRIGGER_COLORS[1]}, ${255 - RIGHT_TRIGGER_COLORS[2]})`;
+        document.getElementById("right_trigger").style.fill = `rgb(${255 - RIGHT_TRIGGER_COLORS[0]}, ${255 - RIGHT_TRIGGER_COLORS[1]}, ${255 - RIGHT_TRIGGER_COLORS[2]})`;
 
         const MOVEMENT_AMOUNT_LEFT = [CONTROLLER.left_stick_axis_x * 3, CONTROLLER.left_stick_axis_y * 3];
-        moveSection("left_stick_ps5", MOVEMENT_AMOUNT_LEFT[0], MOVEMENT_AMOUNT_LEFT[1]); 
-        
+        moveSection("left_stick", MOVEMENT_AMOUNT_LEFT[0], MOVEMENT_AMOUNT_LEFT[1]);
+
         const MOVEMENT_AMOUNT_RIGHT = [CONTROLLER.right_stick_axis_x * 3, CONTROLLER.right_stick_axis_y * 3];
-        moveSection("right_stick_ps5", MOVEMENT_AMOUNT_RIGHT[0], MOVEMENT_AMOUNT_RIGHT[1]); 
+        moveSection("right_stick", MOVEMENT_AMOUNT_RIGHT[0], MOVEMENT_AMOUNT_RIGHT[1]);
 
 
         return requestAnimationFrame(() => this.#main_loop());

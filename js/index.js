@@ -4,9 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('avatar').src = GRAVATAR_URL;
 })
-
-let loaded = false;
-
 window.onresize = (ui_event) => {
     if(window.innerWidth <= 700) {
         document.getElementById("starting-div").classList.remove('unloaded');
