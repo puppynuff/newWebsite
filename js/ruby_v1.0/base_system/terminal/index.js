@@ -8,13 +8,9 @@ class Terminal {
     * @param {HTMLElement} mother_element
     */
     constructor(mother_element, current_path) {
-        let location_marker = document.createElement("div");
-        location_marker.id = "locationMarker";
-        mother_element.appendChild(location_marker)
         this.mother_element = mother_element;
         this.lines = [];
         this.current_path = current_path;
-        this.locationMarker = location_marker;
     }
 
     addLine(line) {
@@ -98,7 +94,7 @@ function handleInput(CURSOR, TERMINAL) {
 async function setup() {
     let cursor = "-";
 
-    opening_header = (await ((await fetch("./js/base_system/terminal/header.txt")).text())).split("\n");
+    opening_header = (await ((await fetch("./js/ruby_v1.0/base_system/terminal/header.txt")).text())).split("\n");
 
     const TERMINAL = new Terminal(document.body, "/");
 
@@ -122,6 +118,9 @@ let applications = {}
  */
 function runCommand(command, CURSOR, TERMINAL) {
     let args = command.split(" ");
+    
+    //? What was I doing here
+    //? Why was I looping here just to index it?
     for(const [KEY, VALUE] in applications) {
         if(!applications[args[0]]) continue;
         (applications[args[0]])(command, args, TERMINAL);

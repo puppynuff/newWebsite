@@ -4,16 +4,16 @@ let packages = {
     neofetch: {
         name: "NeoFetch",
         description: "Gives info on the system (Well as much as I can get)",
-        files: ["/js/packages/neofetch/neofetch.js"]
+        files: ["/js/ruby_v1.0/packages/neofetch/neofetch.js"]
     },
     rwm: {
         name: "RWM",
         description: "Ruby Window Manager, makes a desktop environment",
-        files: [ "/js/packages/rwm/taskbar/taskbar.js",
-            "/js/packages/rwm/rwm.js", 
-            "/js/packages/rwm/windows/window.js",
-            "/js/packages/rwm/applications/app_store/app_store.js",
-            "/js/packages/rwm/applications/about/about.js"
+        files: [ "/js/ruby_v1.0/packages/rwm/taskbar/taskbar.js",
+            "/js/ruby_v1.0/packages/rwm/rwm.js", 
+            "/js/ruby_v1.0/packages/rwm/windows/window.js",
+            "/js/ruby_v1.0/packages/rwm/applications/app_store/app_store.js",
+            "/js/ruby_v1.0/packages/rwm/applications/about/about.js"
         ]
     },
 
@@ -21,7 +21,7 @@ let packages = {
     blahaj: {
         name: "blahaj",
         description: "Prints an ascii art of blahaj :D",
-        files: ["/js/packages/blahaj/blahaj.js"]
+        files: ["/js/ruby_v1.0/packages/blahaj/blahaj.js"]
     }
 };
 

@@ -13,5 +13,6 @@ window.onresize = (ui_event) => {
 
 
 function ruby_clicked() {
-    window.location.href = "./ruby.html"
+    window.location.href = "./ruby_v1.html"
 }
+
