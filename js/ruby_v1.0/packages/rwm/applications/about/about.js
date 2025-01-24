@@ -18,7 +18,7 @@ function about_taskbar_handler() {
 
     const IFRAME = document.createElement("iframe");
 
-    IFRAME.src = "/shemightbeshiro.html";
+    IFRAME.src = "/";
     IFRAME.height = "100%";
     IFRAME.width = "100%";
 
